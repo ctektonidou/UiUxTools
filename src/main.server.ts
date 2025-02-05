@@ -1,6 +1,8 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
+import { platformDynamicServer } from '@angular/platform-server';
+import { AppServerModule } from './app/app.server.module';
 
-const bootstrap = () => bootstrapApplication(AppComponent);
-
-export default bootstrap;
+export default function bootstrap() {
+  return platformDynamicServer()
+    .bootstrapModule(AppServerModule)
+    .catch(err => console.error(err));
+}

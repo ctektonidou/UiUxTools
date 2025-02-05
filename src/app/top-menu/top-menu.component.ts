@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-top-menu',
   templateUrl: './top-menu.component.html',
-  styleUrl: './top-menu.component.css'
+  styleUrl: './top-menu.component.scss'
 })
 export class TopMenuComponent {
-  isLoggedIn = false; // Set this based on authentication logic
+  isLoggedIn = false;
 }
