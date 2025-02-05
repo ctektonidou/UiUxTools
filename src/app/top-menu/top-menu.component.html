@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <span class="logo">UIXplorer</span>
+  
+    <span class="spacer"></span>
+  
+    <ng-container *ngIf="isLoggedIn; else guestTemplate">
+      <button mat-button>Αποσύνδεση</button>
+      <button mat-button>Διαχείριση Εργαλείων</button>
+      <button mat-button>Αναζήτηση</button>
+      <button mat-button>Το προφίλ μου</button>
+    </ng-container>
+  
+    <ng-template #guestTemplate>
+      <span class="profile-link">Το προφίλ μου</span>
+      <button mat-button color="primary">Σύνδεση</button>
+      <button mat-button color="accent">Εγγραφή</button>
+    </ng-template>
+  </mat-toolbar>
+  
