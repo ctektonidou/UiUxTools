@@ -1,0 +1,44 @@
+.footer {
+    background-color: #3e721d; /* Dark Green */
+    color: white;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .left {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo {
+    font-family: serif;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .powered-by {
+    font-size: 14px;
+    color: white;
+  }
+  
+  .right {
+    text-align: right;
+  }
+  
+  .footer-link {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  

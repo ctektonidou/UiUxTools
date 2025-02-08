@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './top-menu.component.scss'
 })
 export class TopMenuComponent {
-  isLoggedIn = false;
+  isLoggedIn = true;
+  isAdmin = true;
 }
