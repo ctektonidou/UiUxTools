@@ -1,0 +1,24 @@
+<div class="login-modal">
+  <button class="close-btn" (click)="closeDialog()">✖</button>
+
+  <h2>Καλώς ήρθατε!</h2>
+
+  <mat-form-field>
+    <input matInput placeholder="Εισαγωγή Email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Εισαγωγή Κωδικού" type="password">
+    <button mat-icon-button matSuffix>
+      <mat-icon>visibility</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <a href="#" class="forgot-password">Υπεύθυνη Κωδικού</a>
+
+  <button mat-raised-button class="login-btn">Σύνδεση</button>
+
+  <p class="register-text">
+    Είσαι νέος χρήστης; <a href="#">Δημιουργία Λογαριασμού</a>
+  </p>
+</div>

@@ -5,6 +5,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { TopMenuComponent } from "./top-menu.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatDialogModule } from "@angular/material/dialog";
+import { LoginModule } from "../login/login.module";
 
 const routes: Routes = [
     { path: '', component: TopMenuComponent }
@@ -16,8 +18,10 @@ const routes: Routes = [
         MatMenuModule,
         MatButtonModule,
         MatToolbarModule,
+        MatDialogModule,
         RouterModule,
-        CommonModule
+        CommonModule,
+        LoginModule
     ],
     exports: [TopMenuComponent]
 })
