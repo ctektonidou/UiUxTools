@@ -15,15 +15,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Import components
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
 import { FooterModule } from './footer/footer.module';
 import { TopMenuModule } from './top-menu/top-menu.module';
+import { SearchModule } from './search/search.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +32,7 @@ import { TopMenuModule } from './top-menu/top-menu.module';
     HttpClientModule,
     FooterModule,
     TopMenuModule,
+    SearchModule,
 
     // Material Modules
     MatButtonModule,

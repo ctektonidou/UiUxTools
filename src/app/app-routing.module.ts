@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 
 // Import your components here
@@ -8,9 +7,9 @@ import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: '', component: SearchComponent }, // Default route
-//   { path: 'login', component: LoginComponent }, // Login route
-//   { path: 'dashboard', component: DashboardComponent }, // Protected dashboard route
-//   { path: '**', component: NotFoundComponent }, // 404 Not Found route
+  { path: 'search', component: SearchComponent }, // Login route
+  //   { path: 'dashboard', component: DashboardComponent }, // Protected dashboard route
+  //   { path: '**', component: NotFoundComponent }, // 404 Not Found route
 ];
 
 @NgModule({

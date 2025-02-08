@@ -1,19 +1,38 @@
-/* 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
-
+/* Ensure full-page height */
 html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  app-root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  router-outlet {
-    flex-grow: 1;
-  }
-  
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make app-root a flex container */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensure the main content expands */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fix router-outlet so it takes space properly */
+router-outlet {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure footer stays at the bottom */
+.footer {
+  background-color: #3e721d;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  margin-top: auto; /* Pushes footer down */
+}

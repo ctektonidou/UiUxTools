@@ -1,1 +1,34 @@
-
+<div class="search-container">
+    <h2>Αναζήτηση</h2>
+  
+    <!-- Search Input Bar -->
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Αναζήτηση εργαλείων..." (input)="filterResults()">
+    </div>
+  
+    <!-- Filters -->
+    <div class="filters">
+      <label>Target Audience</label>
+      <select><option>All</option></select>
+  
+      <label>Platform Support</label>
+      <select><option>All</option></select>
+  
+      <label>Pricing Model</label>
+      <select><option>All</option></select>
+  
+      <div>
+        <label>Specific Use Cases</label>
+        <input type="checkbox"> Animation
+        <input type="checkbox"> Wireframing
+      </div>
+  
+      <button (click)="search()" class="search-btn">Αναζήτηση</button>
+    </div>
+  
+    <!-- Search Results -->
+    <div class="results">
+      <app-search-item *ngFor="let item of filteredResults" [item]="item"></app-search-item>
+    </div>
+  </div>
+  
