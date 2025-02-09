@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
+import { EvaluationComponent } from '../evaluation/evaluation.component';
 
 @Component({
   selector: 'app-top-menu',
@@ -32,4 +33,12 @@ export class TopMenuComponent {
       backdropClass: 'custom-dialog-backdrop',
     });
   }
+
+  // openEvaluationDialog() {
+  //   this.dialog.open(EvaluationComponent, {
+  //     width: '500px',
+  //     panelClass: 'custom-dialog-container',
+  //     backdropClass: 'custom-dialog-backdrop'
+  //   });
+  // }
 }

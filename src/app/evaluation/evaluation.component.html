@@ -1,0 +1,42 @@
+<mat-dialog-content class="evaluation-popup">
+    <!-- Title -->
+    <div class="popup-header">
+        <h2>Αξιολόγηση</h2>
+        <button mat-icon-button (click)="closeDialog()" class="close-btn">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <!-- Rating Section 1 -->
+    <div class="rating-section">
+        <p>Εύκολο στη χρήση</p>
+        <div class="stars">
+            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('easeOfUse', star)"
+                [ngClass]="{'selected': easeOfUseRating >= star}">
+                star
+            </mat-icon>
+        </div>
+    </div>
+
+    <!-- Rating Section 2 -->
+    <div class="rating-section">
+        <p>Αληθινά Χαρακτηριστικά</p>
+        <div class="stars">
+            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('trueFeatures', star)"
+                [ngClass]="{'selected': trueFeaturesRating >= star}">
+                star
+            </mat-icon>
+        </div>
+    </div>
+
+    <!-- Review Input -->
+    <div class="review-section">
+        <p>Γράψε την αξιολόγησή σου</p>
+        <textarea [(ngModel)]="reviewText" placeholder="Τι σου άρεσε σε αυτό το προϊόν και τι όχι;"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="submit-section">
+        <button mat-raised-button class="submit-btn" (click)="submitReview()">Δημοσίευση</button>
+    </div>
+</mat-dialog-content>

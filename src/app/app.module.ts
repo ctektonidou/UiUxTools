@@ -20,6 +20,7 @@ import { TopMenuModule } from './top-menu/top-menu.module';
 import { SearchModule } from './search/search.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterModule } from './register/register.module';
+import { EvaluationModule } from './evaluation/evaluation.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { RegisterModule } from './register/register.module';
     SearchModule,
     BrowserAnimationsModule,
     RegisterModule,
+    EvaluationModule,
 
     // Material Modules
     MatButtonModule,
