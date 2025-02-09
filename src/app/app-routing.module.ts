@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './search/search.component';
-
-// Import your components here
-// import { HomeComponent } from './components/home/home.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: SearchComponent }, // Default route
-  { path: 'search', component: SearchComponent }, // Login route
-  //   { path: 'dashboard', component: DashboardComponent }, // Protected dashboard route
-  //   { path: '**', component: NotFoundComponent }, // 404 Not Found route
+  { path: '', redirectTo: 'search', pathMatch: 'full' }, // Fix auto-redirect issue
+  { path: 'search', component: SearchComponent },
+  { path: 'user-profile', component: UserProfileComponent }
 ];
 
 @NgModule({

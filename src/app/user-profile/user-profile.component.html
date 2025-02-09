@@ -1,0 +1,43 @@
+<div class="profile-container col-12 mt-5">
+    <!-- Profile Image -->
+    <div class="profile-image col-4 d-flex flex-column justify-content-center align-items-center">
+        <img [src]="profileImage" alt="Profile Picture">
+        <p (click)="triggerFileInput()">Αλλαγή εικόνας</p>
+        <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+    </div>
+
+    <div class="col-6">
+        <!-- Profile Form -->
+        <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+            <div class="form-group">
+                <label for="firstName">Όνομα</label>
+                <input id="firstName" type="text" formControlName="firstName">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Επώνυμο</label>
+                <input id="lastName" type="text" formControlName="lastName">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" [disabled]="true">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Κωδικός</label>
+                <input id="password" type="password" formControlName="password">
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-12 d-flex justify-content-end">
+                <button *ngIf="!isEditing" type="button" (click)="toggleEdit()" class="edit-btn">
+                    Επεξεργασία
+                </button>
+                <button *ngIf="isEditing" type="submit" class="submit-btn" [disabled]="profileForm.invalid">
+                    Ενημέρωση Στοιχείων
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

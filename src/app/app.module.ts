@@ -21,6 +21,7 @@ import { SearchModule } from './search/search.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterModule } from './register/register.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { EvaluationModule } from './evaluation/evaluation.module';
     BrowserAnimationsModule,
     RegisterModule,
     EvaluationModule,
+    UserProfileModule,
 
     // Material Modules
     MatButtonModule,

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
-import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -14,7 +14,10 @@ export class TopMenuComponent {
   isLoggedIn = false;
   isAdmin = true;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router
+  ) { }
 
   openLoginDialog(): void {
     this.dialog.open(LoginComponent, {
@@ -41,4 +44,12 @@ export class TopMenuComponent {
   //     backdropClass: 'custom-dialog-backdrop'
   //   });
   // }
+
+  goToUserProfile() {
+    this.router.navigate(['/user-profile']); 
+  }
+
+  goToSearch() {
+    this.router.navigate(['/search']); 
+  }
 }

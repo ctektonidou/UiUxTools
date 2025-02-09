@@ -1,0 +1,63 @@
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-image {
+    text-align: center;
+    cursor: pointer;
+    /* Makes image clickable */
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #ddd;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    display: block;
+}
+
+.profile-image p {
+    font-size: 14px;
+    color: #444;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: orange;
+    color: white;
+}
+
+.submit-btn {
+    background-color: #3e721d;
+    color: white;
+}

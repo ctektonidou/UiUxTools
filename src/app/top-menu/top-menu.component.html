@@ -1,5 +1,5 @@
 <mat-toolbar class="custom-toolbar">
-  <span class="logo">UIXplorer</span>
+  <span class="logo"><a (click)="goToSearch()">UIXplorer</a></span>
 
   <span class="spacer"></span>
 
@@ -7,12 +7,13 @@
     <button mat-button class="menu-item">Αποσύνδεση</button>
     <button mat-button class="menu-item" *ngIf="isAdmin">Διαχείριση Εργαλείων</button>
     <button mat-button class="menu-item">Αναζήτηση</button>
-    <button mat-button class="menu-item">Το προφίλ μου</button>
+    <button mat-button class="menu-item" (click)="goToUserProfile()">Το προφίλ μου</button>
   </ng-container>
 
   <ng-template #guestTemplate>
-    <!-- na ginei <a> wste na mporei na to patisei -->
-    <span class="profile-link">Το προφίλ μου</span>
+    <span class="profile-link">
+      <a (click)="goToUserProfile()">Το προφίλ μου</a>
+    </span>
     <button mat-button class="login-btn text-white" (click)="openLoginDialog()">Σύνδεση</button>
     <button mat-button class="register-btn text-white" (click)="openRegisterDialog()">Εγγραφή</button>
   </ng-template>
