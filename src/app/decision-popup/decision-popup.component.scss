@@ -1,0 +1,71 @@
+.decision-popup {
+    text-align: center;
+    padding: 20px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: lightgreen;
+    /* Default */
+}
+
+.popup-header.delete {
+    background-color: #ffcccc;
+    /* Light Red */
+}
+
+.popup-header.success {
+    background-color: #b8e994;
+    /* Light Green */
+}
+
+.popup-header.approve {
+    background-color: #f9e79f;
+    /* Light Yellow */
+}
+
+.icon-container {
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+.delete-icon {
+    color: red;
+    font-size: 60px;
+}
+
+.success-icon {
+    color: green;
+    font-size: 60px;
+}
+
+.approve-icon {
+    color: black;
+    font-size: 60px;
+}
+
+.popup-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cancel-btn {
+    background-color: red;
+    color: white;
+}
+
+.confirm-btn {
+    background-color: green;
+    color: white;
+}

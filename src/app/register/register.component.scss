@@ -1,8 +1,9 @@
-.login-modal {
+.register-modal {
   background: #f5f5f5;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  width: 100%;
 }
 
 .close-btn {
@@ -15,13 +16,19 @@
   cursor: pointer;
 }
 
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: green;
+}
+
 mat-form-field {
   width: 100%;
   margin-top: 10px;
-  border-radius: 1px solid grey;
+  width: 100%;
 }
 
-.login-btn {
+.register-btn {
   background-color: #3e721d;
   color: white;
   width: 100%;
@@ -30,14 +37,10 @@ mat-form-field {
   border-radius: 10px;
 }
 
-.register-text a {
+.login-text a {
   color: green;
   font-weight: bold;
   text-decoration: none;
-}
-
-.code {
-  border: 1px solid grey;
 }
 
 mat-icon-button {

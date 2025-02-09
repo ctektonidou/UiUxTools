@@ -7,6 +7,7 @@ import { TopMenuComponent } from "./top-menu.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDialogModule } from "@angular/material/dialog";
 import { LoginModule } from "../login/login.module";
+import { RegisterModule } from "../register/register.module";
 
 const routes: Routes = [
     { path: '', component: TopMenuComponent }
@@ -21,7 +22,8 @@ const routes: Routes = [
         MatDialogModule,
         RouterModule,
         CommonModule,
-        LoginModule
+        LoginModule,
+        RegisterModule
     ],
     exports: [TopMenuComponent]
 })

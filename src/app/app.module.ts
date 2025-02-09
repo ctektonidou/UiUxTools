@@ -18,6 +18,8 @@ import { AppComponent } from './app.component';
 import { FooterModule } from './footer/footer.module';
 import { TopMenuModule } from './top-menu/top-menu.module';
 import { SearchModule } from './search/search.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterModule } from './register/register.module';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { SearchModule } from './search/search.module';
     FooterModule,
     TopMenuModule,
     SearchModule,
+    BrowserAnimationsModule,
+    RegisterModule,
 
     // Material Modules
     MatButtonModule,

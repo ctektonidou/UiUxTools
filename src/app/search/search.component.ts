@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchItem } from '../models/search-item.model';
+import { SearchItem } from '../shared/models/search-item.model';
 
 @Component({
   selector: 'app-search',
@@ -43,6 +43,26 @@ export class SearchComponent {
     this.filteredResults = this.searchResults.filter(item =>
       item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
+  }
+
+  //example using decision popup
+  confirmDelete() {
+    // const dialogRef = this.dialog.open(DecisionPopupComponent, {
+    //   width: '400px',
+    //   data: {
+    //     type: DecisionPopupType.DELETE,
+    //     title: 'Επιβεβαίωση Διαγραφής Εργαλείου',
+    //     message: 'Είστε σίγουροι ότι θέλετε να διαγράψετε το εργαλείο;'
+    //   }
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     console.log('Tool deleted!');
+    //   } else {
+    //     console.log('Deletion cancelled.');
+    //   }
+    // });
   }
 
 }
