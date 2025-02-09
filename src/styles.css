@@ -6,37 +6,22 @@ html, body {
   flex-direction: column;
 }
 
-/* Make app-root a flex container */
-app-root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
-/* Ensure the main content expands */
 .main-content {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  min-height: 600px;
 }
 
-/* Fix router-outlet so it takes space properly */
-router-outlet {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensure footer stays at the bottom */
 .footer {
   background-color: #3e721d;
   color: white;
   padding: 20px;
   width: 100%;
   text-align: center;
-  margin-top: auto; /* Pushes footer down */
 }
 
+/* Ensure dialog appears in the center of the screen */
 .custom-dialog-container .mat-dialog-container {
   display: flex;
   flex-direction: column;
@@ -45,11 +30,18 @@ router-outlet {
   background: #f5f5f5; /* Light background */
   padding: 20px;
   border-radius: 10px;
+  width: 100%;
 }
 
-/* Fix full-screen issue and center modal */
-.mat-dialog-container {
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: hidden;
+/* Center dialog absolutely */
+.custom-dialog-container .mat-dialog-container {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Custom backdrop (grey background) */
+.custom-dialog-backdrop {
+  background: rgba(0, 0, 0, 0.5) !important;
 }

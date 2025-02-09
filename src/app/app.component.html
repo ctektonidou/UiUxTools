@@ -1,8 +1,12 @@
-<app-top-menu></app-top-menu>
+<div class="d-flex justify-between flex-column">
+  <app-top-menu></app-top-menu>
 
-<!-- Main content container -->
-<div class="main-content">
-  <router-outlet></router-outlet>
+  <!-- Main content container -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <div class="mt-5">
+    <app-footer></app-footer>
+  </div>
 </div>
-
-<app-footer></app-footer>
