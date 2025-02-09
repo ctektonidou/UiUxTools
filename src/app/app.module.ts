@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterModule } from './register/register.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { DecisionPopupModule } from './decision-popup/decision-popup.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     RegisterModule,
     EvaluationModule,
     UserProfileModule,
+    DecisionPopupModule,
 
     // Material Modules
     MatButtonModule,

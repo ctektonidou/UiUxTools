@@ -79,13 +79,16 @@ export class UserProfileComponent implements OnInit {
 
   confirmUpdate() {
     const dialogRef = this.dialog.open(DecisionPopupComponent, {
-      width: '400px',
+      width: '600px',
       data: {
         type: DecisionPopupType.APPROVE,
         title: 'Επιβεβαίωση Ενημέρωσης Στοιχείων',
         message: 'Είστε σίγουροι ότι θέλετε να ενημερώσετε τα στοιχεία χρήστη σας;'
-      }
+      },
+      panelClass: 'custom-dialog-container',
+      backdropClass: 'custom-dialog-backdrop',
     });
+    //na dw pws 8a pairnw to emit gia to ti ekane
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

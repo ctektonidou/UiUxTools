@@ -19,7 +19,7 @@
 
   <!-- Buttons -->
   <div class="popup-buttons">
-    <button mat-raised-button class="cancel-btn" (click)="cancel()">Ακύρωση</button>
+    <button mat-raised-button class="cancel-btn" (click)="cancel()" *ngIf="data.type !== 'success'">Ακύρωση</button>
     <button mat-raised-button class="confirm-btn" (click)="confirm()">
       {{ data.type === 'success' ? 'OK' : 'Επιβεβαίωση' }}
     </button>
