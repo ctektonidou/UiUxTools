@@ -34,7 +34,7 @@
                 <button *ngIf="!isEditing" type="button" (click)="toggleEdit()" class="edit-btn">
                     Επεξεργασία
                 </button>
-                <button *ngIf="isEditing" type="submit" class="submit-btn" [disabled]="profileForm.invalid">
+                <button *ngIf="isEditing" type="submit" class="submit-btn" [disabled]="profileForm.invalid" (click)="confirmUpdate()">
                     Ενημέρωση Στοιχείων
                 </button>
             </div>

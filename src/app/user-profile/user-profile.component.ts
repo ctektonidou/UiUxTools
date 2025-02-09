@@ -1,5 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
+import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,7 +15,10 @@ export class UserProfileComponent implements OnInit {
   isEditing: boolean = false; // Controls form state
   profileImage: string = 'assets/profile-placeholder.png'; // Default profile image
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.initUserProfileForm();
@@ -65,5 +71,28 @@ export class UserProfileComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  updateUserDetails() {
+
+  }
+
+  confirmUpdate() {
+    const dialogRef = this.dialog.open(DecisionPopupComponent, {
+      width: '400px',
+      data: {
+        type: DecisionPopupType.APPROVE,
+        title: 'Επιβεβαίωση Ενημέρωσης Στοιχείων',
+        message: 'Είστε σίγουροι ότι θέλετε να ενημερώσετε τα στοιχεία χρήστη σας;'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateUserDetails();
+      } else {
+        console.log('Update cancelled.');
+      }
+    });
   }
 }

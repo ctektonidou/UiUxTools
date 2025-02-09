@@ -1,28 +1,27 @@
 <mat-dialog-content class="decision-popup">
-    <!-- Header -->
-    <div class="popup-header" [ngClass]="data.type">
-      <h2>{{ data.title }}</h2>
-      <button mat-icon-button (click)="cancel()" class="close-btn">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-  
-    <!-- Icon Section -->
-    <div class="icon-container">
-      <mat-icon *ngIf="data.type === 'delete'" class="delete-icon">delete</mat-icon>
-      <mat-icon *ngIf="data.type === 'success'" class="success-icon">check_circle</mat-icon>
-      <mat-icon *ngIf="data.type === 'approve'" class="approve-icon">edit</mat-icon>
-    </div>
-  
-    <!-- Message -->
-    <p class="popup-message">{{ data.message }}</p>
-  
-    <!-- Buttons -->
-    <div class="popup-buttons">
-      <button mat-raised-button class="cancel-btn" (click)="cancel()">Ακύρωση</button>
-      <button mat-raised-button class="confirm-btn" (click)="confirm()">
-        {{ data.type === 'success' ? 'OK' : 'Επιβεβαίωση' }}
-      </button>
-    </div>
-  </mat-dialog-content>
-  
+  <!-- Header -->
+  <div class="popup-header" [ngClass]="data.type">
+    <h2>{{ data.title }}</h2>
+    <button mat-icon-button (click)="cancel()" class="close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Icon Section -->
+  <div class="icon-container">
+    <mat-icon *ngIf="data.type === 'delete'" class="delete-icon">delete</mat-icon>
+    <mat-icon *ngIf="data.type === 'success'" class="success-icon">check_circle</mat-icon>
+    <mat-icon *ngIf="data.type === 'approve'" class="approve-icon">edit</mat-icon>
+  </div>
+
+  <!-- Message -->
+  <p class="popup-message">{{ data.message }}</p>
+
+  <!-- Buttons -->
+  <div class="popup-buttons">
+    <button mat-raised-button class="cancel-btn" (click)="cancel()">Ακύρωση</button>
+    <button mat-raised-button class="confirm-btn" (click)="confirm()">
+      {{ data.type === 'success' ? 'OK' : 'Επιβεβαίωση' }}
+    </button>
+  </div>
+</mat-dialog-content>
