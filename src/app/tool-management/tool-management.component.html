@@ -1,0 +1,30 @@
+<div class="tool-management-container">
+    <h2>Διαχείριση Εργαλείων</h2>
+  
+    <!-- Add Tool Button -->
+     <div class="d-flex justify-content-end">
+        <button class="add-tool-btn" (click)="goToAddTool()">Προσθήκη Εργαλείου</button>
+     </div>
+  
+    <!-- Tools Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Κωδικός</th>
+          <th>Όνομα</th>
+          <th>Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tool of tools">
+          <td>{{ tool.code }}</td>
+          <td>{{ tool.name }}</td>
+          <td>
+            <button class="edit-btn" (click)="editTool(tool)">✏️</button>
+            <button class="delete-btn" (click)="confirmDeleteTool(tool)">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

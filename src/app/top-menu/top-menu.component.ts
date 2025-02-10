@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class TopMenuComponent {
-  isLoggedIn = false;
+  isLoggedIn = true;
   isAdmin = true;
 
   constructor(
@@ -51,5 +51,9 @@ export class TopMenuComponent {
 
   goToSearch() {
     this.router.navigate(['/search']); 
+  }
+
+  goToToolManagement() {
+    this.router.navigate(['/admin/tools']); 
   }
 }

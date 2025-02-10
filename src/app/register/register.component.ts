@@ -49,16 +49,18 @@ export class RegisterComponent {
     //register call
   }
 
-  openLoginDialog(): void {
+  openLoginDialog(event: Event): void {
+    event.preventDefault(); //Stops any default navigation
+
     this.dialogRef.close(); 
 
-    setTimeout(() => {
+    this.dialogRef.afterClosed().subscribe(() => {
       this.dialog.open(LoginComponent, {
         width: '450px',
         disableClose: true,
         panelClass: 'custom-dialog-container',
         backdropClass: 'custom-dialog-backdrop',
       });
-    }, 100);
+    });
   }
 }

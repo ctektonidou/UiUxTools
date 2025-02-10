@@ -1,16 +1,17 @@
 import { NgModule } from "@angular/core";
-import { MatMenuModule } from "@angular/material/menu";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { MatToolbarModule } from "@angular/material/toolbar";
 import { SearchComponent } from "./search.component";
 import { SearchItemComponent } from "./search-item/search-item.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes: Routes = [
     { path: '', component: SearchComponent }
-  ];
+];
 
 @NgModule({
     declarations: [SearchComponent, SearchItemComponent],
@@ -18,7 +19,11 @@ const routes: Routes = [
         MatButtonModule,
         RouterModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatCheckboxModule
     ],
     exports: [SearchComponent]
 })

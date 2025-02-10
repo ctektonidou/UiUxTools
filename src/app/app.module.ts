@@ -23,6 +23,7 @@ import { RegisterModule } from './register/register.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { DecisionPopupModule } from './decision-popup/decision-popup.module';
+import { ToolManagementModule } from './tool-management/tool-management.module';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { DecisionPopupModule } from './decision-popup/decision-popup.module';
     EvaluationModule,
     UserProfileModule,
     DecisionPopupModule,
+    ToolManagementModule,
 
     // Material Modules
     MatButtonModule,

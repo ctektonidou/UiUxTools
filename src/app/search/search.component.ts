@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SearchItem } from '../shared/models/search-item.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -7,6 +8,8 @@ import { SearchItem } from '../shared/models/search-item.model';
   styleUrl: './search.component.scss'
 })
 export class SearchComponent {
+  searchForm!: FormGroup;
+
   searchResults: SearchItem[] = [
     { name: 'Figma', logo: 'assets/figma.png', rating: 4.7, reviews: 5 },
     { name: 'Adobe Photoshop', logo: 'assets/photoshop.png', rating: 4.6, reviews: 5 },
@@ -14,16 +17,29 @@ export class SearchComponent {
     { name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 },
     { name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 }
   ];
+  targetOptions = ['All', 'Beginners', 'Professionals', 'Enterprises'];
+  platformOptions = ['All', 'Web', 'Mobile', 'Desktop'];
+  pricingOptions = ['All', 'Free', 'Paid', 'Subscription'];
+
   searchQuery: string = "";
 
   filteredResults: SearchItem[] = [...this.searchResults]; 
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
 
   }
 
   initForm() {
-
+    this.searchForm = this.fb.group({
+      searchQuery: [''],
+      selectedTarget: ['All'],
+      selectedPlatform: ['All'],
+      selectedPricing: ['All'],
+      useCaseAnimation: [false],
+      useCaseWireframing: [false]
+    });
   }
 
   getFilterLists() {

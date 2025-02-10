@@ -37,17 +37,19 @@ export class LoginComponent {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  openRegisterDialog(): void {
+  openRegisterDialog(event: Event): void {
+    event.preventDefault(); //Stops any default navigation
+    
     this.dialogRef.close();
-
-    setTimeout(() => {
+  
+    this.dialogRef.afterClosed().subscribe(() => {
       this.dialog.open(RegisterComponent, {
         width: '450px',
         disableClose: true,
         panelClass: 'custom-dialog-container',
         backdropClass: 'custom-dialog-backdrop',
       });
-    }, 100);
-  }
+    });
+  }  
 
 }
