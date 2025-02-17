@@ -20,8 +20,8 @@
           <td>{{ tool.code }}</td>
           <td>{{ tool.name }}</td>
           <td>
-            <button class="edit-btn" (click)="editTool(tool)">✏️</button>
-            <button class="delete-btn" (click)="confirmDeleteTool(tool)">🗑</button>
+            <button class="edit-btn" (click)="editTool(tool)" matTooltip="Επεξεργασία Εργαλείου" matTooltipPosition="above">✏️</button>
+            <button class="delete-btn" (click)="confirmDeleteTool(tool)" matTooltip="Διαγραφή Εργαλείου" matTooltipPosition="above">🗑</button>
           </td>
         </tr>
       </tbody>

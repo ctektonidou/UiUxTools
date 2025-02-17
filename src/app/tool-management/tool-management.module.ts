@@ -3,6 +3,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { ToolManagementComponent } from "./tool-management.component";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const routes: Routes = [
     { path: '', component: ToolManagementComponent }
@@ -14,6 +15,7 @@ const routes: Routes = [
         MatButtonModule,
         RouterModule,
         CommonModule,
+        MatTooltipModule
     ],
     exports: [ToolManagementComponent]
 })

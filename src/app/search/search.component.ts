@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchItem } from '../shared/models/search-item.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PassCompareListService } from '../shared/services/pass-compare-list.service';
 
 @Component({
   selector: 'app-search',
@@ -23,12 +24,18 @@ export class SearchComponent {
 
   searchQuery: string = "";
 
-  filteredResults: SearchItem[] = [...this.searchResults]; 
+  filteredResults: SearchItem[] = [...this.searchResults];
+  showCompare: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private passCompareListService: PassCompareListService
+  ) { }
 
   ngOnInit() {
-
+    this.passCompareListService.selectedCompareList$.subscribe(list => {
+      this.showCompare = list.length > 0;
+    });
   }
 
   initForm() {
@@ -79,6 +86,18 @@ export class SearchComponent {
     //     console.log('Deletion cancelled.');
     //   }
     // });
+  }
+
+  showCompareButton(data: any) {
+    if (data) {
+      this.showCompare = true;
+    } else {
+      this.showCompare = false;
+    }
+  }
+
+  goToCompare() {
+
   }
 
 }

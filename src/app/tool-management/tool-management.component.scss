@@ -1,51 +1,67 @@
 .tool-management-container {
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
-  
-  .add-tool-btn {
-    background-color: #3e721d;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #3e721d;
-    color: white;
-  }
-  
-  .edit-btn, .delete-btn {
-    border: none;
-    cursor: pointer;
-    background: none;
-    font-size: 18px;
-  }
-  
-  .edit-btn {
-    color: #ff9800;
-  }
-  
-  .delete-btn {
-    color: red;
-  }
-  
+  padding: 20px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.add-tool-btn {
+  background-color: #3e721d;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #3e721d;
+  color: white;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 18px;
+}
+
+.edit-btn {
+  color: #ff9800;
+}
+
+.delete-btn {
+  color: red;
+}
+
+.custom-tooltip {
+  position: fixed !important;
+}
+
+.mat-tooltip {
+  position: fixed !important;
+  z-index: 10000 !important;
+  white-space: nowrap;
+}
+
+.tool-management-container, table {
+  overflow: visible !important;
+  position: relative !important;
+}

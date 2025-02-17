@@ -26,3 +26,15 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and button */
+}
+
+.swap-icon {
+  font-size: 22px;
+  color: #3e721d; /* Match the button color */
+  cursor: pointer;
+}

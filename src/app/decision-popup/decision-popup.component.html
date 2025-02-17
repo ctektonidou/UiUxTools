@@ -12,6 +12,7 @@
     <mat-icon *ngIf="data.type === 'delete'" class="delete-icon">delete</mat-icon>
     <mat-icon *ngIf="data.type === 'success'" class="success-icon">check_circle</mat-icon>
     <mat-icon *ngIf="data.type === 'approve'" class="approve-icon">edit</mat-icon>
+    <mat-icon *ngIf="data.type === 'info'" class="info-icon">info</mat-icon>
   </div>
 
   <!-- Message -->
@@ -19,9 +20,9 @@
 
   <!-- Buttons -->
   <div class="popup-buttons">
-    <button mat-raised-button class="cancel-btn" (click)="cancel()" *ngIf="data.type !== 'success'">Ακύρωση</button>
+    <button mat-raised-button class="cancel-btn" (click)="cancel()" *ngIf="(data.type !== 'success' && data.type !== 'info')">Ακύρωση</button>
     <button mat-raised-button class="confirm-btn" (click)="confirm()">
-      {{ data.type === 'success' ? 'OK' : 'Επιβεβαίωση' }}
+      {{ (data.type === 'success' || data.type === 'info') ? 'OK' : 'Επιβεβαίωση' }}
     </button>
   </div>
 </mat-dialog-content>

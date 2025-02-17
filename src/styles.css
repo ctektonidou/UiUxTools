@@ -1,9 +1,11 @@
 /* Ensure full-page height */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 
@@ -43,5 +45,38 @@ html, body {
   width: 100%;
   text-align: center;
   position: relative;
-  z-index: 10; /* ✅ Ensure it is below the modal */
+  z-index: 10;
+  /* ✅ Ensure it is below the modal */
+}
+
+.mat-tooltip-panel {
+  position: fixed !important;
+}
+
+
+/*mat-tooltip below*/
+.cdk-overlay-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.cdk-overlay-pane {
+  position: absolute !important;
+}
+
+.cdk-describedby-message-container,
+.cdk-visually-hidden {
+  display: none;
+}
+
+.success-snackbar {
+  background-color: #3e721d !important;
+  color: white !important;
+  font-size: 16px;
+  text-align: center;
 }

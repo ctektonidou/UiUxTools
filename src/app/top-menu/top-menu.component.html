@@ -6,7 +6,7 @@
   <ng-container *ngIf="isLoggedIn; else guestTemplate">
     <button mat-button class="menu-item">Αποσύνδεση</button>
     <button mat-button class="menu-item" *ngIf="isAdmin" (click)="goToToolManagement()">Διαχείριση Εργαλείων</button>
-    <button mat-button class="menu-item">Αναζήτηση</button>
+    <button mat-button class="menu-item" (click)="goToSearch()">Αναζήτηση</button>
     <button mat-button class="menu-item" (click)="goToUserProfile()">Το προφίλ μου</button>
   </ng-container>
 
