@@ -1,0 +1,17 @@
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.compare-table th,
+.compare-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.feature-column {
+    font-weight: bold;
+    background: #f8f8f8;
+}

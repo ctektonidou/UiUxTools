@@ -1,0 +1,40 @@
+.tool-card {
+    width: 250px;
+    /* Fixed width */
+    height: 300px;
+    /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.tool-logo {
+    width: 100%;
+    height: 120px;
+    /* Fixed height for logo */
+    object-fit: contain;
+}
+
+.rating {
+    font-size: 16px;
+    color: #ffcc00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: red;
+}

@@ -1,0 +1,17 @@
+<table class="compare-table">
+    <thead>
+      <tr>
+        <th>Χαρακτηριστικά</th>
+        <th *ngFor="let tool of compareList">{{ tool.name }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feature of featureList">
+        <td class="feature-column">{{ feature.name }}</td>
+        <td *ngFor="let tool of compareList">
+          {{ tool[feature.key] || 'N/A' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

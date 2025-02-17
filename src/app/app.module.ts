@@ -24,6 +24,8 @@ import { EvaluationModule } from './evaluation/evaluation.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { DecisionPopupModule } from './decision-popup/decision-popup.module';
 import { ToolManagementModule } from './tool-management/tool-management.module';
+import { CompareToolsModule } from './compare-tools/compare-tools.module';
+import { CreateEditToolModule } from './create-edit-tool/create-edit-tool.module';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { ToolManagementModule } from './tool-management/tool-management.module';
     UserProfileModule,
     DecisionPopupModule,
     ToolManagementModule,
+    CompareToolsModule,
+    CreateEditToolModule,
 
     // Material Modules
     MatButtonModule,

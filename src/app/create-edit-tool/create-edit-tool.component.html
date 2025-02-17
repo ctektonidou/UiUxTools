@@ -1,0 +1,75 @@
+<div class="tool-form-container mt-5">
+    <h2>{{ isEditMode ? 'Επεξεργασία Εργαλείου' : 'Εισαγωγή Νέου Εργαλείου' }}</h2>
+
+    <form [formGroup]="toolForm" (ngSubmit)="onSubmit()">
+        <!-- Left Section: Image Upload -->
+        <div class="image-upload">
+            <div class="image-preview">
+                <img *ngIf="toolForm.get('imageUrl')?.value" [src]="toolForm.get('imageUrl')?.value" alt="Tool Image">
+                <div *ngIf="!toolForm.get('imageUrl')?.value" class="placeholder">
+                    <mat-icon>image</mat-icon>
+                </div>
+            </div>
+            <button type="button" class="image-btn" (click)="triggerFileInput()">Εισαγωγή Εικόνας</button>
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+        </div>
+
+        <!-- Right Section: Form -->
+        <div class="tool-details">
+            <div class="form-group">
+                <label>Όνομα Προϊόντος</label>
+                <input type="text" formControlName="name" placeholder="Εισάγετε Όνομα Προϊόντος">
+            </div>
+
+            <div class="form-group">
+                <label>Περιγραφή Προϊόντος</label>
+                <textarea formControlName="description" placeholder="Εισάγετε Περιγραφή Προϊόντος"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Link Προϊόντος</label>
+                <input type="url" formControlName="productLink" placeholder="Εισάγετε Link Προϊόντος">
+            </div>
+        </div>
+
+        <!-- Filters & Criteria -->
+        <div class="search-criteria">
+            <mat-form-field>
+                <mat-label>Target Audience</mat-label>
+                <mat-select formControlName="targetAudience">
+                    <mat-option value="Beginners">Beginners</mat-option>
+                    <mat-option value="Professionals">Professionals</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Platform Support</mat-label>
+                <mat-select formControlName="platformSupport">
+                    <mat-option value="Windows">Windows</mat-option>
+                    <mat-option value="MacOS">MacOS</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Pricing Model</mat-label>
+                <mat-select formControlName="pricingModel">
+                    <mat-option value="Free">Free</mat-option>
+                    <mat-option value="Paid">Paid</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="checkbox-group">
+                <mat-checkbox formControlName="animation">Animation</mat-checkbox>
+                <mat-checkbox formControlName="wireframing">Wireframing</mat-checkbox>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button type="button" class="cancel-btn" (click)="cancel()">Ακύρωση</button>
+            <button type="submit" class="save-btn" [disabled]="toolForm.invalid">
+                {{ isEditMode ? 'Αποθήκευση' : 'Δημιουργία' }}
+            </button>
+        </div>
+    </form>
+</div>

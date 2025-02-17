@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tool-management',
@@ -16,7 +17,8 @@ export class ToolManagementComponent {
   ];
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,8 +45,6 @@ export class ToolManagementComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteTool(tool);
-      } else {
-        console.log('delete cancelled.');
       }
     });
   }
@@ -59,6 +59,6 @@ export class ToolManagementComponent {
   }
 
   goToAddTool() {
-
+    this.router.navigate(['/tools/create']);
   }
 }

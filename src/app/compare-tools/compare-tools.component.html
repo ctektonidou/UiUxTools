@@ -1,1 +1,22 @@
-<p>compare-tools works!</p>
+<div class="compare-container mt-5">
+  <h2>Σύγκριση <mat-icon>sync_alt</mat-icon></h2>
+
+  <!-- Remove All Button -->
+  <div class="d-flex justify-content-end">
+    <button *ngIf="compareList.length > 0" (click)="clearComparison()" class="clear-btn">
+      Διαγραφή Σύγκρισης
+    </button>
+  </div>
+
+  <!-- Tools List -->
+  <div class="tools-list mt-5">
+    <app-compare-tool-item *ngFor="let tool of compareList" [tool]="tool" (remove)="removeItem($event)">
+    </app-compare-tool-item>
+  </div>
+
+  <!-- Comparison Table -->
+  <app-compare-table *ngIf="compareList.length > 0" [compareList]="compareList"></app-compare-table>
+
+  <!-- No Tools Message -->
+  <p *ngIf="compareList.length === 0" class="empty-message mt-5">Δεν έχετε επιλέξει εργαλεία για σύγκριση.</p>
+</div>

@@ -14,8 +14,8 @@ import { PassCompareListService } from '../../shared/services/pass-compare-list.
 export class SearchItemComponent {
   @Input() item!: SearchItem;
   // @Output() item!: SearchItem;
-  @Output() hasCompareList = new EventEmitter<string[]>();
-  compareList: string[] = [];
+  @Output() hasCompareList = new EventEmitter<SearchItem[]>();
+  compareList: SearchItem[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -36,7 +36,7 @@ export class SearchItemComponent {
     //na mpei emit pou na pernaei to item ston mpampa search
   }
 
-  addItemToCompareList(itemCode: string): void {
+  addItemToCompareList(itemCode: SearchItem): void {
     if (this.compareList.includes(itemCode)) {
       this.showDuplicatePopup();
     } else if (this.compareList.length < 3) {

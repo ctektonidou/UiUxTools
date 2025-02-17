@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SearchItem } from '../shared/models/search-item.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PassCompareListService } from '../shared/services/pass-compare-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -29,7 +30,8 @@ export class SearchComponent {
 
   constructor(
     private fb: FormBuilder,
-    private passCompareListService: PassCompareListService
+    private passCompareListService: PassCompareListService,
+        private router: Router
   ) { }
 
   ngOnInit() {
@@ -97,7 +99,7 @@ export class SearchComponent {
   }
 
   goToCompare() {
-
+    this.router.navigate(['/compare']);
   }
 
 }

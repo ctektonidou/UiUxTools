@@ -8,16 +8,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { CompareToolsComponent } from "./compare-tools.component";
-import { CompareToolItemComponent } from "./compare-tool-item/compare-tool-item.component";
-import { CompareTableComponent } from "./compare-table/compare-table.component";
+import { CreateEditToolComponent } from "./create-edit-tool.component";
 
 const routes: Routes = [
-    { path: '', component: CompareToolsComponent }
+    { path: '', component: CreateEditToolComponent }
 ];
 
 @NgModule({
-    declarations: [CompareToolsComponent, CompareToolItemComponent, CompareTableComponent],
+    declarations: [CreateEditToolComponent],
     imports: [
         MatButtonModule,
         RouterModule,
@@ -27,9 +25,8 @@ const routes: Routes = [
         MatFormFieldModule,
         ReactiveFormsModule,
         MatCheckboxModule,
-        MatIconModule,
-        MatSnackBarModule
+        MatIconModule
     ],
-    exports: [CompareToolsComponent]
+    exports: [CreateEditToolComponent]
 })
-export class CompareToolsModule { }
+export class CreateEditToolModule { }

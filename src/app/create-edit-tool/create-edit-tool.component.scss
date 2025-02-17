@@ -1,0 +1,152 @@
+.tool-form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Image Upload Section */
+    .image-upload {
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            background: #f3f3f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #ccc;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .image-btn {
+            background-color: #3e721d;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    }
+
+    /* Right Side Form Details */
+    .tool-details {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+    }
+
+    /* Filters & Criteria */
+    .search-criteria {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: space-between;
+
+        mat-form-field {
+            width: 30%;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    /* Buttons */
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        button {
+            width: 45%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        .save-btn {
+            background-color: #3e721d;
+            color: white;
+        }
+
+        .save-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tool-form-container {
+        max-width: 100%;
+    }
+
+    .search-criteria {
+        flex-direction: column;
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+
+        button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+}
