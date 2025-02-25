@@ -54,7 +54,6 @@ export class ToolManagementComponent {
   }
 
   editTool(tool: any) {
-    console.log('Editing:', tool);
     this.router.navigate(['/tools/' + tool.id + '/edit']);
   }
 

@@ -1,0 +1,33 @@
+.reviews-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-container h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.no-reviews {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    mat-icon {
+        color: #ffcc00; // Yellow color for stars
+        font-size: 20px;
+    }
+}
+
+.rate {
+    margin-left: 10px;
+}

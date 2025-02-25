@@ -1,22 +1,33 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SearchItem } from '../../shared/models/search-item.model';
-import { DecisionPopupComponent } from '../../decision-popup/decision-popup.component';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DecisionPopupType } from '../../shared/enums/desicion-popup-type.enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PassCompareListService } from '../../shared/services/pass-compare-list.service';
+import { PassCompareListService } from '../shared/services/pass-compare-list.service';
 import { Router } from '@angular/router';
+import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
+import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
+import { EvaluationComponent } from '../evaluation/evaluation.component';
 
 @Component({
-  selector: 'app-search-item',
-  templateUrl: './search-item.component.html',
-  styleUrl: './search-item.component.scss'
+  selector: 'app-tool-display',
+  templateUrl: './tool-display.component.html',
+  styleUrls: ['./tool-display.component.scss']
 })
-export class SearchItemComponent {
-  @Input() item!: SearchItem;
-  // @Output() item!: SearchItem;
-  @Output() hasCompareList = new EventEmitter<SearchItem[]>();
-  compareList: SearchItem[] = [];
+export class ToolDisplayComponent implements OnInit {
+
+  compareList: any[] = [];
+
+  tool = {
+    imageUrl: 'assets/drawio.png',
+    name: 'Draw.io',
+    description: 'Free online diagram software for making flowcharts...',
+    link: 'https://app.diagrams.net/',
+    targetAudience: 'Beginners',
+    platformSupport: 'Windows, MacOS',
+    pricingModel: 'Free (Limited Features)',
+    useCases: 'UI Design',
+    animation: false,
+    reviewGrade: 3
+  };
 
   constructor(
     public dialog: MatDialog,
@@ -25,26 +36,27 @@ export class SearchItemComponent {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
+  ngOnInit() {
     this.passCompareListService.selectedCompareList$.subscribe(res => {
       this.compareList = Array.isArray(res) ? res : [];
     })
   }
 
-  goToTool(item: SearchItem) {
-    this.router.navigate(['/tools/' + item.id + '/display']);
+  openEvaluationDialog(tool: any) {
+    this.dialog.open(EvaluationComponent, {
+      width: '500px',
+      panelClass: 'custom-dialog-container',
+      backdropClass: 'custom-dialog-backdrop',
+      data: { tool }
+    });
   }
 
-  addItemToCompareList(itemCode: SearchItem): void {
+  addItemToCompareList(itemCode: any): void {
     if (this.compareList.includes(itemCode)) {
       this.showDuplicatePopup();
     } else if (this.compareList.length < 3) {
       this.compareList.push(itemCode);
       this.passCompareListService.setCompareList([...this.compareList]);
-      this.hasCompareList.emit(this.compareList);
       this.showAddedNotification();
     } else {
       this.showLimitPopup();
@@ -79,11 +91,10 @@ export class SearchItemComponent {
 
   showAddedNotification(): void {
     this.snackBar.open('Το εργαλείο προστέθηκε στη λίστα σύγκρισης!', undefined, {
-      duration: 3000, // hide after 3 seconds
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     });
   }
-
 }

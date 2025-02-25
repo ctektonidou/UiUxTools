@@ -37,14 +37,6 @@ export class TopMenuComponent {
     });
   }
 
-  // openEvaluationDialog() {
-  //   this.dialog.open(EvaluationComponent, {
-  //     width: '500px',
-  //     panelClass: 'custom-dialog-container',
-  //     backdropClass: 'custom-dialog-backdrop'
-  //   });
-  // }
-
   goToUserProfile() {
     this.router.navigate(['/user-profile']); 
   }

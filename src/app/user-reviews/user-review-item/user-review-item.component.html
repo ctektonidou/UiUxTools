@@ -1,0 +1,39 @@
+<div class="review-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="review-header">
+            <img class="user-avatar" [src]="review.userImage" alt="User Avatar">
+            <h3>{{ review.username }}</h3>
+        </div>
+        <div class="d-flex">
+            <span class="stars">
+                <mat-icon *ngFor="let star of getStars(review.reviewGrade); let i = index">
+                    {{ star }}
+                </mat-icon>
+            </span>
+            <span>{{review.reviewGrade}}</span>
+        </div>
+    </div>
+   
+
+    <p class="comment">{{ review.comment }}</p>
+
+    <div class="rating-section">
+        <p>Easy to use:</p>
+        <span class="stars">
+            <mat-icon *ngFor="let star of getStars(review.easeOfUse); let i = index">
+                {{ star }}
+            </mat-icon>
+        </span>
+        <span>{{review.easeOfUse}}</span>
+    </div>
+
+    <div class="rating-section">
+        <p>True Characteristics:</p>
+        <span class="stars">
+            <mat-icon *ngFor="let star of getStars(review.trueCharacteristics); let i = index">
+                {{ star }}
+            </mat-icon>
+        </span>
+        <span>{{review.trueCharacteristics}}</span>
+    </div>
+</div>

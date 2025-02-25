@@ -6,6 +6,7 @@ import { authGuard } from './shared/guards/auth.guard';
 import { ToolManagementComponent } from './tool-management/tool-management.component';
 import { CompareToolsComponent } from './compare-tools/compare-tools.component';
 import { CreateEditToolComponent } from './create-edit-tool/create-edit-tool.component';
+import { ToolDisplayComponent } from './tool-display/tool-display.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' }, // Fix auto-redirect issue
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'compare', component: CompareToolsComponent },
   { path: 'tools/create', component: CreateEditToolComponent, canActivate: [authGuard] },
   { path: 'tools/:id/edit', component: CreateEditToolComponent, canActivate: [authGuard] },
-  // { path: 'tools/:id/display', component: ToolDisplayComponent },
+  { path: 'tools/:id/display', component: ToolDisplayComponent },
 ];
 
 @NgModule({

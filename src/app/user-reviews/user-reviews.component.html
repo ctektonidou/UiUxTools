@@ -1,0 +1,19 @@
+<div class="reviews-container">
+    <div class="d-flex flex-row aling-items-center">
+        <h2>Αξιολογήσεις</h2>
+        <div class="d-flex align-items-center rate">
+            <span class="stars">
+                <mat-icon *ngFor="let star of getStars(reviewGrade); let i = index">
+                    {{ star }}
+                </mat-icon>
+            </span>
+            <span>{{reviewGrade}}</span>
+        </div>
+    </div>
+
+    <!-- Show Message If No Reviews -->
+    <p *ngIf="!reviews?.length" class="no-reviews">No reviews available.</p>
+
+    <!-- Render Reviews -->
+    <app-user-review-item *ngFor="let review of reviews" [review]="review"></app-user-review-item>
+</div>

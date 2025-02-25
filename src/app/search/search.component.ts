@@ -13,11 +13,11 @@ export class SearchComponent {
   searchForm!: FormGroup;
 
   searchResults: SearchItem[] = [
-    { name: 'Figma', logo: 'assets/figma.png', rating: 4.7, reviews: 5 },
-    { name: 'Adobe Photoshop', logo: 'assets/photoshop.png', rating: 4.6, reviews: 5 },
-    { name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 },
-    { name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 },
-    { name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 }
+    { id: 1, name: 'Figma', logo: 'assets/figma.png', rating: 4.7, reviews: 5 },
+    { id: 2, name: 'Adobe Photoshop', logo: 'assets/photoshop.png', rating: 4.6, reviews: 5 },
+    { id: 3, name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 },
+    { id: 4, name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 },
+    { id: 5, name: 'Draw.io', logo: 'assets/drawio.png', rating: 3.7, reviews: 15 }
   ];
   targetOptions = ['All', 'Beginners', 'Professionals', 'Enterprises'];
   platformOptions = ['All', 'Web', 'Mobile', 'Desktop'];

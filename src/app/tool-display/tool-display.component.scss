@@ -1,0 +1,120 @@
+.tool-container {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.tool-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.tool-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.tool-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tool-rating {
+    font-size: 16px;
+    color: #FFA500;
+}
+
+/* Buttons Section */
+.tool-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.compare-btn,
+.save-btn {
+    background-color: #3e721d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.compare-btn {
+    background-color: #ffcc00;
+    /* Yellow for Compare */
+}
+
+.save-btn {
+    background-color: #3e721d;
+    /* Green for Save */
+}
+
+.compare-btn:hover,
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+/* Tool Image and Description */
+.tool-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.tool-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.tool-description {
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+/* Characteristics Table */
+.tool-characteristics {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-characteristics th,
+.tool-characteristics td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tool-characteristics th {
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.tool-link {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.swap-icon {
+    font-size: 22px;
+    color: #3e721d;
+    cursor: pointer;
+}

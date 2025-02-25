@@ -27,6 +27,8 @@ import { ToolManagementModule } from './tool-management/tool-management.module';
 import { CompareToolsModule } from './compare-tools/compare-tools.module';
 import { CreateEditToolModule } from './create-edit-tool/create-edit-tool.module';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { UserReviewsModule } from './user-reviews/user-reviews.module';
+import { ToolDisplayModule } from './tool-display/tool-display.module';
 
 
 @NgModule({
@@ -35,7 +37,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, // Register routes
+    AppRoutingModule, // Routes
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -51,6 +53,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     CompareToolsModule,
     CreateEditToolModule,
     OverlayModule,
+    ToolDisplayModule,
+    UserReviewsModule,
 
     // Material Modules
     MatButtonModule,
