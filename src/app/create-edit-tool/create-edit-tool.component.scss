@@ -1,34 +1,61 @@
 .tool-form-container {
     display: flex;
     flex-direction: column;
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     padding: 20px;
+}
 
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
+/* Section Layout */
+.form-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: border 0.3s ease-in-out;
+
+    &:focus {
+        border-color: #3e721d;
+        outline: none;
     }
+}
 
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
 
-    /* Image Upload Section */
+/* Left Sections */
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 48%;
+
     .image-upload {
-        text-align: center;
-        margin-bottom: 20px;
+        background: #f6f2f1;
+        padding: 20px;
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
 
         .image-preview {
             width: 150px;
             height: 150px;
             border-radius: 8px;
-            background: #f3f3f3;
+            background: #e0d6d3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,92 +79,94 @@
         }
     }
 
-    /* Right Side Form Details */
     .tool-details {
+        background: #f6f2f1;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .form-group {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input,
-        textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
+        margin-bottom: 10px;
     }
 
-    /* Filters & Criteria */
-    .search-criteria {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: space-between;
-
-        mat-form-field {
-            width: 30%;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-        }
+    input,
+    textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
     }
 
-    /* Buttons */
-    .button-group {
+    textarea {
+        height: 80px;
+        resize: vertical;
+    }
+}
+
+/* Right Section (Filters) */
+.right-section {
+    background: #f6f2f1;
+    padding: 20px;
+    border-radius: 8px;
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .checkbox-group {
         display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
 
-        button {
-            width: 45%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
 
-        .cancel-btn {
-            background-color: #d9534f;
-            color: white;
-        }
+    button {
+        width: 20%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-        .save-btn {
-            background-color: #3e721d;
-            color: white;
-        }
+    .cancel-btn {
+        background-color: #d9534f;
+        color: white;
+        margin-right: 20px;
+    }
 
-        .save-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+    .save-btn {
+        background-color: #3e721d;
+        color: white;
+    }
+
+    .save-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .tool-form-container {
-        max-width: 100%;
+    .form-sections {
+        flex-direction: column;
     }
 
-    .search-criteria {
-        flex-direction: column;
-
-        mat-form-field {
-            width: 100%;
-        }
+    .left-section,
+    .right-section {
+        width: 100%;
     }
 
     .button-group {

@@ -55,7 +55,7 @@ export class ToolManagementComponent {
 
   editTool(tool: any) {
     console.log('Editing:', tool);
-    //router na mpei
+    this.router.navigate(['/tools/' + tool.id + '/edit']);
   }
 
   goToAddTool() {

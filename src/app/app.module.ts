@@ -26,6 +26,7 @@ import { DecisionPopupModule } from './decision-popup/decision-popup.module';
 import { ToolManagementModule } from './tool-management/tool-management.module';
 import { CompareToolsModule } from './compare-tools/compare-tools.module';
 import { CreateEditToolModule } from './create-edit-tool/create-edit-tool.module';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { CreateEditToolModule } from './create-edit-tool/create-edit-tool.module
     ToolManagementModule,
     CompareToolsModule,
     CreateEditToolModule,
+    OverlayModule,
 
     // Material Modules
     MatButtonModule,

@@ -1,66 +1,70 @@
-<div class="tool-form-container mt-5">
-    <h2>{{ isEditMode ? 'Επεξεργασία Εργαλείου' : 'Εισαγωγή Νέου Εργαλείου' }}</h2>
+<div class="tool-form-container">
+    <h1>{{ isEditMode ? 'Επεξεργασία Εργαλείου' : 'Εισαγωγή Νέου Εργαλείου' }}</h1>
 
     <form [formGroup]="toolForm" (ngSubmit)="onSubmit()">
-        <!-- Left Section: Image Upload -->
-        <div class="image-upload">
-            <div class="image-preview">
-                <img *ngIf="toolForm.get('imageUrl')?.value" [src]="toolForm.get('imageUrl')?.value" alt="Tool Image">
-                <div *ngIf="!toolForm.get('imageUrl')?.value" class="placeholder">
-                    <mat-icon>image</mat-icon>
+        <!-- Section Layout -->
+        <div class="form-sections">
+
+            <!-- Left Section: Image Upload -->
+            <div class="left-section">
+                <div class="image-upload">
+                    <div class="image-preview">
+                        <img *ngIf="toolForm.get('imageUrl')?.value" [src]="toolForm.get('imageUrl')?.value"
+                            alt="Tool Image">
+                        <div *ngIf="!toolForm.get('imageUrl')?.value" class="placeholder">
+                            <mat-icon>image</mat-icon>
+                        </div>
+                    </div>
+                    <button type="button" class="image-btn" (click)="triggerFileInput()">Εισαγωγή Εικόνας</button>
+                    <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+                </div>
+
+                <!-- General Information -->
+                <div class="tool-details">
+                    <h3>Γενικές Πληροφορίες</h3>
+                    <div class="form-group">
+                        <label>Όνομα Προϊόντος</label>
+                        <input type="text" formControlName="name" placeholder="Εισάγετε Όνομα Προϊόντος">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Περιγραφή Προϊόντος</label>
+                        <textarea formControlName="description" placeholder="Εισάγετε Περιγραφή Προϊόντος"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Link Προϊόντος</label>
+                        <input type="url" formControlName="productLink" placeholder="Εισάγετε Link Προϊόντος">
+                    </div>
                 </div>
             </div>
-            <button type="button" class="image-btn" (click)="triggerFileInput()">Εισαγωγή Εικόνας</button>
-            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
-        </div>
 
-        <!-- Right Section: Form -->
-        <div class="tool-details">
-            <div class="form-group">
-                <label>Όνομα Προϊόντος</label>
-                <input type="text" formControlName="name" placeholder="Εισάγετε Όνομα Προϊόντος">
-            </div>
+            <!-- Right Section: Search Criteria -->
+            <div class="right-section">
+                <h3>Κριτήρια Αναζήτησης</h3>
 
-            <div class="form-group">
-                <label>Περιγραφή Προϊόντος</label>
-                <textarea formControlName="description" placeholder="Εισάγετε Περιγραφή Προϊόντος"></textarea>
-            </div>
+                <label for="targetAudience">Target Audience</label>
+                <select id="targetAudience" formControlName="targetAudience" class="custom-select">
+                    <option value="Beginners">Beginners</option>
+                    <option value="Professionals">Professionals</option>
+                </select>
 
-            <div class="form-group">
-                <label>Link Προϊόντος</label>
-                <input type="url" formControlName="productLink" placeholder="Εισάγετε Link Προϊόντος">
-            </div>
-        </div>
+                <label for="platformSupport">Platform Support</label>
+                <select id="platformSupport" formControlName="platformSupport" class="custom-select">
+                    <option value="Windows">Windows</option>
+                    <option value="MacOS">MacOS</option>
+                </select>
 
-        <!-- Filters & Criteria -->
-        <div class="search-criteria">
-            <mat-form-field>
-                <mat-label>Target Audience</mat-label>
-                <mat-select formControlName="targetAudience">
-                    <mat-option value="Beginners">Beginners</mat-option>
-                    <mat-option value="Professionals">Professionals</mat-option>
-                </mat-select>
-            </mat-form-field>
+                <label for="pricingModel">Pricing Model</label>
+                <select id="pricingModel" formControlName="pricingModel" class="custom-select">
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                </select>
 
-            <mat-form-field>
-                <mat-label>Platform Support</mat-label>
-                <mat-select formControlName="platformSupport">
-                    <mat-option value="Windows">Windows</mat-option>
-                    <mat-option value="MacOS">MacOS</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Pricing Model</mat-label>
-                <mat-select formControlName="pricingModel">
-                    <mat-option value="Free">Free</mat-option>
-                    <mat-option value="Paid">Paid</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <div class="checkbox-group">
-                <mat-checkbox formControlName="animation">Animation</mat-checkbox>
-                <mat-checkbox formControlName="wireframing">Wireframing</mat-checkbox>
+                <div class="checkbox-group">
+                    <mat-checkbox formControlName="animation">Animation</mat-checkbox>
+                    <mat-checkbox formControlName="wireframing">Wireframing</mat-checkbox>
+                </div>
             </div>
         </div>
 
@@ -68,7 +72,7 @@
         <div class="button-group">
             <button type="button" class="cancel-btn" (click)="cancel()">Ακύρωση</button>
             <button type="submit" class="save-btn" [disabled]="toolForm.invalid">
-                {{ isEditMode ? 'Αποθήκευση' : 'Δημιουργία' }}
+                {{ isEditMode ? 'Ενημέρωση' : 'Δημιουργία' }}
             </button>
         </div>
     </form>
