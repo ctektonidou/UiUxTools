@@ -8,6 +8,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
+import { FormsModule } from "@angular/forms";
 
 const routes: Routes = [
     { path: '', component: LoginComponent }
@@ -23,7 +24,8 @@ const routes: Routes = [
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        FormsModule
     ],
     exports: [LoginComponent]
 })

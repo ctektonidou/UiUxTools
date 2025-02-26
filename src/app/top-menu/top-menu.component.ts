@@ -3,6 +3,7 @@ import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -11,13 +12,21 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class TopMenuComponent {
-  isLoggedIn = true;
+  isLoggedIn: boolean = false;
+
   isAdmin = true;
 
   constructor(
     public dialog: MatDialog,
-    private router: Router
-  ) { }
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.isAuthenticated$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+  }
 
   openLoginDialog(): void {
     this.dialog.open(LoginComponent, {
@@ -47,5 +56,9 @@ export class TopMenuComponent {
 
   goToToolManagement() {
     this.router.navigate(['/admin/tools']); 
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
