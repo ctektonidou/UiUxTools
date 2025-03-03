@@ -2,8 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TokenController } from '../shared/token/token_controller';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -11,21 +14,21 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrl: './top-menu.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class TopMenuComponent {
+export class TopMenuComponent extends TokenController {
   isLoggedIn: boolean = false;
 
   isAdmin = true;
 
   constructor(
     public dialog: MatDialog,
-    private router: Router,
-    private authService: AuthService
-  ) {}
+    router: Router,
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+  ) {
+    super(router)
+  }
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
   }
 
   openLoginDialog(): void {
@@ -47,18 +50,30 @@ export class TopMenuComponent {
   }
 
   goToUserProfile() {
-    this.router.navigate(['/user-profile']); 
+    this.getRouter()?.navigate(['/user-profile']);
   }
 
   goToSearch() {
-    this.router.navigate(['/search']); 
+    this.getRouter()?.navigate(['/search']);
   }
 
   goToToolManagement() {
-    this.router.navigate(['/admin/tools']); 
+    this.getRouter()?.navigate(['/admin/tools']);
   }
 
   logout() {
-    this.authService.logout();
+    console.log('Logout successful:');
+    localStorage.clear();
+    this.showAddedNotification('Επιτυχώς αποσυνδεθήκατε');
+    this.getRouter()?.navigate(['/login']);
+  }
+
+  showAddedNotification(text: string): void {
+    this.snackBar.open(text, undefined, {
+      duration: 3000, // hide after 3 seconds
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
   }
 }
