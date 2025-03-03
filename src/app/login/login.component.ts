@@ -80,6 +80,8 @@ export class LoginComponent extends TokenController {
           this.userRole = this.decodeJwt(this.token);
           localStorage.setItem('userRole', this.userRole);
           localStorage.setItem('email', this.email);
+          this.userId = data.userId;
+          localStorage.setItem('userId', this.userId.toString());
           this.closeDialog();
         }
       },

@@ -6,3 +6,9 @@ export interface User {
     firstname?: string;
     typeOfUser?: string;
 }
+
+export interface UpdateUserRequest {
+    password?: string;
+    lastname?: string;
+    firstname?: string;
+}

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetAllToolsResponse } from "../interfaces/get-all-tools";
-import { User } from "../interfaces/user";
+import { UpdateUserRequest, User } from "../interfaces/user";
 
 export interface Tool {
     id?: string;
@@ -52,10 +52,10 @@ export class ToolService {
     }
 
     getUser(userId: number): Observable<User> {
-        return this.http.get<User>(`${this.apiUrl}/user/${userId}`);
+        return this.http.get<User>(`${this.apiUrl}/user?userId=${userId}`);
     }
 
-    getUserId(email: string): Observable<User> {
-        return this.http.post<User>(`${this.apiUrl}/user/userId`, email);
+    updateUser(userId: number, user: Partial<User>): Observable<User> {
+        return this.http.put<User>(`${this.apiUrl}/user/${userId}`, user);
     }
 }

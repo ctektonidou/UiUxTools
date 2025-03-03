@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 import { ToolService } from '../shared/services/tool.service';
-import { User } from '../shared/interfaces/user';
+import { UpdateUserRequest, User } from '../shared/interfaces/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,6 +17,8 @@ export class UserProfileComponent implements OnInit {
   isEditing: boolean = false; // Controls form state
   profileImage: string = 'assets/profile-placeholder.png'; // Default profile image
   user?: User;
+  userId: any;
+  passwordVisible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,13 +27,14 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getUserProfileDetails();
+    if (localStorage.getItem('userId') !== null) {
+      this.userId = Number(localStorage.getItem('userId'));
+      this.getUserProfileDetails();
+    };
   }
 
   getUserProfileDetails() {
-    //TODO NA PAIRNW KAPWS TO USERID
-    const userId = localStorage.getItem('userId');
-    this.toolService.getUser(123).subscribe(response => {
+    this.toolService.getUser(this.userId).subscribe(response => {
       if (response) {
         this.user = response;
         this.initUserProfileForm();
@@ -43,19 +46,18 @@ export class UserProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       firstName: [{ value: '', disabled: true }, Validators.required],
       lastName: [{ value: '', disabled: true }, Validators.required],
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      email: [{ value: '', disabled: true }],
       password: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(6)]]
     });
     this.fillUserForm();
   }
 
   fillUserForm() {
-    //user data call
     this.profileForm.patchValue({
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      password: '******'
+      firstName: this.user?.firstname,
+      lastName: this.user?.lastname,
+      email: this.user?.email,
+      password: this.user?.password
     });
   }
 
@@ -70,6 +72,7 @@ export class UserProfileComponent implements OnInit {
       console.log('Updated Profile:', this.profileForm.value);
       this.isEditing = false;
       this.profileForm.disable(); // Disable form after update
+      this.updateUserDetails();
     }
   }
 
@@ -88,10 +91,6 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  updateUserDetails() {
-
-  }
-
   confirmUpdate() {
     const dialogRef = this.dialog.open(DecisionPopupComponent, {
       width: '600px',
@@ -103,14 +102,36 @@ export class UserProfileComponent implements OnInit {
       panelClass: 'custom-dialog-container',
       backdropClass: 'custom-dialog-backdrop',
     });
-    //na dw pws 8a pairnw to emit gia to ti ekane
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.updateUserDetails();
+        this.submitProfile();
       } else {
         console.log('Update cancelled.');
       }
     });
+  }
+
+  updateUserDetails() {
+    const request: UpdateUserRequest = {
+      password: this.profileForm.controls['password'].value,
+      lastname: this.profileForm.controls['lastName'].value,
+      firstname: this.profileForm.controls['firstName'].value
+    }
+    this.toolService.updateUser(this.userId, request).subscribe(response => {
+      if (response) {
+        window.location.reload();
+      }
+    });
+  }
+
+  cancel() {
+    this.isEditing = false;
+    this.profileForm.disable();
+    this.fillUserForm();
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 }
