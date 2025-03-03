@@ -47,15 +47,23 @@ export class ToolService {
         return this.http.delete<any>(`${this.apiUrl}/${toolId}`);
     }
 
+    //Get All Tools
     getAllTools(): Observable<GetAllToolsResponse[]> {
         return this.http.get<GetAllToolsResponse[]>(`${this.apiUrl}/tools`);
     }
 
+    //Get User
     getUser(userId: number): Observable<User> {
         return this.http.get<User>(`${this.apiUrl}/user?userId=${userId}`);
     }
 
+    //Update User
     updateUser(userId: number, user: Partial<User>): Observable<User> {
         return this.http.put<User>(`${this.apiUrl}/user/${userId}`, user);
+    }
+
+    // Create User
+    createUser(user: Partial<User>): Observable<User> {
+        return this.http.post<User>(`${this.apiUrl}/user`, user);
     }
 }
