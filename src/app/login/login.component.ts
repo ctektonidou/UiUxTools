@@ -75,18 +75,15 @@ export class LoginComponent extends TokenController {
     this.loginService.login(request).subscribe({
       next: data => {
         this.token = data.token;
-        console.log('Received token:', this.token);
         if (this.token) {
           localStorage.setItem('token', this.token);
           this.userRole = this.decodeJwt(this.token);
-          console.log('Role:', this.userRole);
           localStorage.setItem('userRole', this.userRole);
           localStorage.setItem('email', this.email);
           this.closeDialog();
         }
       },
       error: (error) => {
-        console.error('Login error:', error);
         const errorMessage =
           error.status === 401
             ? 'Invalid credentials. Please try again.'

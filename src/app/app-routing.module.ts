@@ -10,7 +10,6 @@ import { ToolDisplayComponent } from './tool-display/tool-display.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' }, // Fix auto-redirect issue
-  { path: '**', redirectTo: 'search' }, // Redirect unknown routes to login
   { path: 'search', component: SearchComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'admin/tools', component: ToolManagementComponent, canActivate: [AuthGuard] },
@@ -18,10 +17,11 @@ const routes: Routes = [
   { path: 'tools/create', component: CreateEditToolComponent, canActivate: [AuthGuard] },
   { path: 'tools/:id/edit', component: CreateEditToolComponent, canActivate: [AuthGuard] },
   { path: 'tools/:id/display', component: ToolDisplayComponent },
+  { path: '**', redirectTo: 'search', pathMatch: 'full' }, // Redirect unknown routes to search
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

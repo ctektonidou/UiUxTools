@@ -1,9 +1,9 @@
-import {HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
+import { HttpHeaders } from "@angular/common/http";
+import { Router } from "@angular/router";
 
-export class TokenController{
+export class TokenController {
 
-    constructor(private router: Router) {}
+    constructor(protected router: Router) { }
 
     createHeadersWithToken(): HttpHeaders {
         const token = this.getToken();
@@ -16,27 +16,27 @@ export class TokenController{
 
     getToken(): string {
         const token = localStorage.getItem('token');
-        if (token){
-            if (this.tokenIsValid(token)){
+        if (token) {
+            if (this.tokenIsValid(token)) {
                 return token;
             }
             else {
-                this.router?.navigate(['/login'], {queryParams: {error: "Η συνεδρία σας έληξε, παρακαλώ ξανασυνδεθείτε.", tokenExpired: true}})
+                this.router.navigate(['/search'], { queryParams: { error: "Η συνεδρία σας έληξε, παρακαλώ ξανασυνδεθείτε.", tokenExpired: true } })
                 return ''
             }
         }
-        this.router?.navigate(['/login'], {queryParams: {error: "Παρακαλώ συνδεθείτε."}})
+        this.router.navigate(['/search'], { queryParams: { error: "Παρακαλώ συνδεθείτε." } })
         return ''
     }
 
-    tokenIsValid(token: string):boolean {
+    tokenIsValid(token: string): boolean {
         //TO-DO
         const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-        const currentTime = (new Date).getTime()/ (1000)
+        const currentTime = (new Date).getTime() / (1000)
         return expiry > currentTime
     }
 
-    getRouter():Router{
+    getRouter(): Router {
         return this.router
     }
 

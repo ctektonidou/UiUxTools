@@ -1,12 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TokenController } from '../shared/token/token_controller';
-import { LoginService } from '../shared/services/login.service';
+import { UserRole } from '../shared/enums/user-role.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -14,21 +12,31 @@ import { LoginService } from '../shared/services/login.service';
   styleUrl: './top-menu.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class TopMenuComponent extends TokenController {
-  isLoggedIn: boolean = false;
-
-  isAdmin = true;
+export class TopMenuComponent{
 
   constructor(
     public dialog: MatDialog,
-    router: Router,
+    private router: Router,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
-    super(router)
   }
 
-  ngOnInit(): void {
+  ngOnInit() {    
+  }
+
+  tokenInLocalStorage(): boolean {
+    const isToken = localStorage.getItem('token');
+    if (isToken) {
+      return true;
+    } return false;
+  }
+
+  isAdmin(): boolean {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole === UserRole.ADMIN) {
+      return true;
+    } return false;
   }
 
   openLoginDialog(): void {
@@ -50,22 +58,22 @@ export class TopMenuComponent extends TokenController {
   }
 
   goToUserProfile() {
-    this.getRouter()?.navigate(['/user-profile']);
+    this.router.navigate(['/user-profile']);    
   }
 
   goToSearch() {
-    this.getRouter()?.navigate(['/search']);
+    this.router.navigate(['/search']);
   }
 
   goToToolManagement() {
-    this.getRouter()?.navigate(['/admin/tools']);
+    this.router.navigate(['/admin/tools']);
+    
   }
 
   logout() {
-    console.log('Logout successful:');
     localStorage.clear();
     this.showAddedNotification('Επιτυχώς αποσυνδεθήκατε');
-    this.getRouter()?.navigate(['/login']);
+    this.router.navigate(['/search']);
   }
 
   showAddedNotification(text: string): void {

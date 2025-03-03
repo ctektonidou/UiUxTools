@@ -29,6 +29,7 @@ import { CreateEditToolModule } from './create-edit-tool/create-edit-tool.module
 import { OverlayModule } from '@angular/cdk/overlay';
 import { UserReviewsModule } from './user-reviews/user-reviews.module';
 import { ToolDisplayModule } from './tool-display/tool-display.module';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ToolDisplayModule } from './tool-display/tool-display.module';
     MatSnackBarModule,
     MatDialogModule
   ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class SearchItemComponent {
   @Input() item!: SearchItem;
-  // @Output() item!: SearchItem;
   @Output() hasCompareList = new EventEmitter<SearchItem[]>();
   compareList: SearchItem[] = [];
 
@@ -25,10 +24,7 @@ export class SearchItemComponent {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
+  ngOnInit() {
     this.passCompareListService.selectedCompareList$.subscribe(res => {
       this.compareList = Array.isArray(res) ? res : [];
     })
