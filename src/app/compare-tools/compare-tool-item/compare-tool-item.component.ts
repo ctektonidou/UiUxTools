@@ -3,6 +3,7 @@ import { SearchItem } from '../../shared/models/search-item.model';
 import { DecisionPopupComponent } from '../../decision-popup/decision-popup.component';
 import { DecisionPopupType } from '../../shared/enums/desicion-popup-type.enum';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-compare-tool-item',
@@ -14,7 +15,8 @@ export class CompareToolItemComponent {
   @Output() remove = new EventEmitter<SearchItem>();
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   confirmDeleteTool(tool: SearchItem) {
@@ -40,7 +42,7 @@ export class CompareToolItemComponent {
     this.remove.emit(tool);
   }
 
-  goToTool(tool:SearchItem) {
-    //go to tool
+  goToTool(tool: SearchItem) {
+    this.router.navigate(['/tools/' + tool.id + '/display']);
   }
 }

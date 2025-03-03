@@ -12,4 +12,11 @@ export interface Tool {
     descirption: string;
     image: string;
     link: string;
+    // targetAudience: string;
+    // platformSupport: string;
+    // pricingModel: string;
+    // useCases: string;
+    // animation: boolean;
+    // wireframing: boolean;
+    // productLink: string;
 }

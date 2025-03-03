@@ -1,28 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { GetAllToolsResponse } from "../interfaces/get-all-tools";
-import { UpdateUserRequest, User } from "../interfaces/user";
-
-export interface Tool {
-    id?: string;
-    name: string;
-    description: string;
-    imageUrl?: string;
-    targetAudience: string;
-    platformSupport: string;
-    pricingModel: string;
-    useCases: string;
-    animation: boolean;
-    wireframing: boolean;
-    productLink: string;
-}
+import { GetAllToolsResponse, Tool } from "../interfaces/get-all-tools";
+import { User } from "../interfaces/user";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ToolService {
-    // private apiUrl = 'https://your-api-url.com/tools'; // Replace with actual API
     private apiUrl = 'http://localhost:8081/api';
 
     constructor(private http: HttpClient) { }
@@ -65,5 +50,10 @@ export class ToolService {
     // Create User
     createUser(user: Partial<User>): Observable<User> {
         return this.http.post<User>(`${this.apiUrl}/user`, user);
+    }
+
+    //get tools for compare
+    getToolsByIds(toolIds: number[]): Observable<Tool[]> {
+        return this.http.post<Tool[]>(`${this.apiUrl}/tools/batch`, toolIds);
     }
 }

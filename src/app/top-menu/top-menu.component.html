@@ -11,6 +11,7 @@
   </ng-container>
 
   <ng-template #guestTemplate>
+    <button mat-button class="menu-item" (click)="goToSearch()">Αναζήτηση</button>
     <button mat-button class="login-btn text-white" (click)="openLoginDialog()">Σύνδεση</button>
     <button mat-button class="register-btn text-white" (click)="openRegisterDialog()">Εγγραφή</button>
   </ng-template>

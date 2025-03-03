@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToolService, Tool } from '../shared/services/tool.service';
+import { ToolService } from '../shared/services/tool.service';
 
 @Component({
   selector: 'app-create-edit-tool',
@@ -84,7 +84,7 @@ export class CreateEditToolComponent implements OnInit {
     } else {
       this.toolService.createTool(this.toolForm.value).subscribe(response => {
         alert('Το εργαλείο δημιουργήθηκε με επιτυχία!');
-        this.router.navigate(['/tools', response.id, 'display']);
+        this.router.navigate(['/tools', response.toolId, 'display']);
       });
     }
   }

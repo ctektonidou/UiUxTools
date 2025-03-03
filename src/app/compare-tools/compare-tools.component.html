@@ -9,7 +9,7 @@
   </div>
 
   <!-- Tools List -->
-  <div class="tools-list mt-5">
+  <div class="tools-list mt-5" *ngIf="loadedTools">
     <app-compare-tool-item *ngFor="let tool of compareList" [tool]="tool" (remove)="removeItem($event)">
     </app-compare-tool-item>
   </div>
