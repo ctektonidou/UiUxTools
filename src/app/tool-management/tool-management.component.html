@@ -17,8 +17,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let tool of tools">
-          <td>{{ tool.code }}</td>
-          <td>{{ tool.name }}</td>
+          <td>{{ tool.toolId }}</td>
+          <td>{{ tool.toolname }}</td>
           <td>
             <button class="edit-btn" (click)="editTool(tool)" matTooltip="Επεξεργασία Εργαλείου" matTooltipPosition="above">✏️</button>
             <button class="delete-btn" (click)="confirmDeleteTool(tool)" matTooltip="Διαγραφή Εργαλείου" matTooltipPosition="above">🗑</button>

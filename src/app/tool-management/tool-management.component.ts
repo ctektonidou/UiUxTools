@@ -3,6 +3,8 @@ import { DecisionPopupComponent } from '../decision-popup/decision-popup.compone
 import { MatDialog } from '@angular/material/dialog';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 import { Router } from '@angular/router';
+import { GetAllToolsResponse, Tool } from '../shared/interfaces/get-all-tools';
+import { ToolService } from '../shared/services/tool.service';
 
 @Component({
   selector: 'app-tool-management',
@@ -10,15 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./tool-management.component.scss']
 })
 export class ToolManagementComponent {
-  tools = [
-    { id: 1, code: '12345677', name: 'Figma' },
-    { id: 2, code: '12345677', name: 'Draw.io' },
-    { id: 3, code: '12345677', name: 'Photo shop Adobe' },
-  ];
+  tools: GetAllToolsResponse[] = [];
 
   constructor(
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private toolService: ToolService
   ) { }
 
   ngOnInit() {
@@ -26,16 +25,18 @@ export class ToolManagementComponent {
   }
 
   getTools() {
-    //api call
+    this.toolService.getAllTools().subscribe(response => {
+      this.tools = response;
+    });
   }
 
-  confirmDeleteTool(tool: any) { //na mpei type
+  confirmDeleteTool(tool: Tool) {
     const dialogRef = this.dialog.open(DecisionPopupComponent, {
       width: '600px',
       data: {
         type: DecisionPopupType.DELETE,
         title: 'Επιβεβαίωση  Διαγραφής Εργαλείου',
-        message: 'Είστε σίγουροι ότι θέλετε να διαγράψετε το ' + tool.name + ' ;'
+        message: 'Είστε σίγουροι ότι θέλετε να διαγράψετε το ' + tool.toolname + ' ;'
       },
       panelClass: 'custom-dialog-container',
       backdropClass: 'custom-dialog-backdrop',
@@ -49,12 +50,17 @@ export class ToolManagementComponent {
     });
   }
 
-  deleteTool(tool: any) {
-    //delete call
+  deleteTool(tool: Tool) {
+    console.log("delete");
+    // this.toolService.deleteTool(tool.toolId).subscribe(response => {// TODO TEST
+    //   if (response) {
+    //     window.location.reload();
+    //   }
+    // });
   }
 
-  editTool(tool: any) {
-    this.router.navigate(['/tools/' + tool.id + '/edit']);
+  editTool(tool: Tool) {
+    this.router.navigate(['/tools/' + tool.toolId + '/edit']);
   }
 
   goToAddTool() {

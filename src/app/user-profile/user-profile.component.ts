@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
+import { ToolService } from '../shared/services/tool.service';
+import { User } from '../shared/interfaces/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,14 +16,27 @@ export class UserProfileComponent implements OnInit {
   profileForm!: FormGroup;
   isEditing: boolean = false; // Controls form state
   profileImage: string = 'assets/profile-placeholder.png'; // Default profile image
+  user?: User;
 
   constructor(
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toolService: ToolService
   ) { }
 
   ngOnInit() {
-    this.initUserProfileForm();
+    this.getUserProfileDetails();
+  }
+
+  getUserProfileDetails() {
+    //TODO NA PAIRNW KAPWS TO USERID
+    const userId = localStorage.getItem('userId');
+    this.toolService.getUser(123).subscribe(response => {
+      if (response) {
+        this.user = response;
+        this.initUserProfileForm();
+      }
+    });
   }
 
   initUserProfileForm() {

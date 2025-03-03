@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { GetAllToolsResponse } from "../interfaces/get-all-tools";
+import { User } from "../interfaces/user";
 
 export interface Tool {
     id?: string;
@@ -20,7 +22,8 @@ export interface Tool {
     providedIn: 'root'
 })
 export class ToolService {
-    private apiUrl = 'https://your-api-url.com/tools'; // Replace with actual API
+    // private apiUrl = 'https://your-api-url.com/tools'; // Replace with actual API
+    private apiUrl = 'http://localhost:8081/api';
 
     constructor(private http: HttpClient) { }
 
@@ -40,7 +43,19 @@ export class ToolService {
     }
 
     // Delete a tool
-    deleteTool(id: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    deleteTool(toolId: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${toolId}`);
+    }
+
+    getAllTools(): Observable<GetAllToolsResponse[]> {
+        return this.http.get<GetAllToolsResponse[]>(`${this.apiUrl}/tools`);
+    }
+
+    getUser(userId: number): Observable<User> {
+        return this.http.get<User>(`${this.apiUrl}/user/${userId}`);
+    }
+
+    getUserId(email: string): Observable<User> {
+        return this.http.post<User>(`${this.apiUrl}/user/userId`, email);
     }
 }
