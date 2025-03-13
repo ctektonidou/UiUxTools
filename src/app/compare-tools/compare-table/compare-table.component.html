@@ -1,17 +1,16 @@
 <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Χαρακτηριστικά</th>
-        <th *ngFor="let tool of compareList">{{ tool.name }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let feature of featureList">
-        <td class="feature-column">{{ feature.name }}</td>
-        <td *ngFor="let tool of compareList">
-          {{ tool[feature.key] || 'N/A' }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th class="feature-column">Χαρακτηριστικά</th>
+      <th *ngFor="let tool of formattedCompareList">{{ tool.toolName }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of featureGroups">
+      <td class="feature-column">{{ group }}</td>
+      <td *ngFor="let tool of formattedCompareList">
+        {{ tool.featureMap[group] || 'N/A' }}
+      </td>
+    </tr>
+  </tbody>
+</table>

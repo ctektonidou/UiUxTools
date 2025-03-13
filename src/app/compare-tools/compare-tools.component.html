@@ -15,7 +15,7 @@
   </div>
 
   <!-- Comparison Table -->
-  <app-compare-table *ngIf="compareList.length > 0" [compareList]="compareList"></app-compare-table>
+  <app-compare-table *ngIf="compareDetailListFinal.length > 0" [compareList]="compareDetailListFinal"></app-compare-table>
 
   <!-- No Tools Message -->
   <p *ngIf="compareList.length === 0" class="empty-message mt-5">Δεν έχετε επιλέξει εργαλεία για σύγκριση.</p>

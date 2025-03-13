@@ -56,4 +56,10 @@ export class ToolService {
     getToolsByIds(toolIds: number[]): Observable<Tool[]> {
         return this.http.post<Tool[]>(`${this.apiUrl}/tools/batch`, toolIds);
     }
+
+    //get tools; details for compare
+    getToolComparison(toolIds: number[]): Observable<any> {
+        console.log("Sending toolIds to API:", JSON.stringify(toolIds)); // Debugging
+        return this.http.post<any>(`${this.apiUrl}/tools/compare`, toolIds);
+    }
 }

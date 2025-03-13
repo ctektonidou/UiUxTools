@@ -8,12 +8,36 @@ import { SearchItem } from '../../shared/models/search-item.model';
 })
 export class CompareTableComponent {
   @Input() compareList: any[] = [];
+  formattedCompareList: any[] = [];
+  featureGroups: string[] = [];
 
-  // Define static feature categories (Adjust as needed)
-  featureList = [
-    { name: 'Platform Support', key: 'platformSupport' },
-    { name: 'Animation', key: 'animation' },
-    { name: 'Free Trial', key: 'freeTrial' },
-    { name: 'Price', key: 'price' }
-  ];
+  ngOnInit() {
+    console.log("Received compareList:", this.compareList);
+    this.prepareComparisonData();
+  }
+
+  prepareComparisonData() {
+    if (!this.compareList || this.compareList.length === 0) return;
+
+    // Extract all unique feature groups
+    const allGroups = new Set<string>();
+    this.compareList.forEach(tool => {
+      tool.formattedFeatures.forEach((feature: any) => allGroups.add(feature.group));
+    });
+
+    this.featureGroups = Array.from(allGroups);
+
+    // Create a lookup table
+    this.formattedCompareList = this.compareList.map(tool => {
+      const featureMap: { [key: string]: string } = {};
+      tool.formattedFeatures.forEach((feature: any) => {
+        featureMap[feature.group] = feature.features;
+      });
+
+      return { ...tool, featureMap };
+    });
+
+    console.log("Formatted Table Data:", this.formattedCompareList);
+  }
+
 }

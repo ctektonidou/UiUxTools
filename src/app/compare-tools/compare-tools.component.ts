@@ -3,6 +3,7 @@ import { PassCompareListService } from '../shared/services/pass-compare-list.ser
 import { SearchItem } from '../shared/models/search-item.model';
 import { ToolService } from '../shared/services/tool.service';
 import { Tool } from '../shared/interfaces/get-all-tools';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-compare-tools',
@@ -13,10 +14,12 @@ export class CompareToolsComponent implements OnInit {
   compareList: SearchItem[] = [];
   loadedTools: boolean = false;
   compareListFinal: Tool[] = [];
+  compareDetailListFinal: any[] = [];
 
   constructor(
     private passCompareListService: PassCompareListService,
-    private toolService: ToolService
+    private toolService: ToolService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +27,7 @@ export class CompareToolsComponent implements OnInit {
       this.compareList = list.slice(0, 3);
     });
     if (this.compareList.length > 0) {
-      this.getToolsDetails();
+      this.getTools();
     }
   }
 
@@ -36,18 +39,55 @@ export class CompareToolsComponent implements OnInit {
   clearComparison() {
     this.compareList = [];
     this.passCompareListService.setCompareList([]);
+    this.router.navigate(['/search']);
   }
 
-  getToolsDetails() {
+  getTools() {
     let compareListIds = [];
     for (let i = 0; i < this.compareList.length; i++) {
       compareListIds.push(this.compareList[i].id);
     }
     this.toolService.getToolsByIds(compareListIds).subscribe(response => {
       if (response) {
-        this.loadedTools = true;
         this.compareListFinal = response;
+        this.loadedTools = true;
+        this.getToolDetails(compareListIds);
       }
     });
   }
+
+  getToolDetails(compareListIds: number[]) {
+    this.toolService.getToolComparison(compareListIds).subscribe(response => {
+      if (response) {
+        console.log("Before Formatting:", response);
+  
+        this.compareDetailListFinal = response.map((tool: any) => ({
+          ...tool,
+          formattedFeatures: this.formatFeatures(tool.features), // 🛠 Format before passing
+        }));
+  
+        console.log("After Formatting:", this.compareDetailListFinal);
+      }
+    });
+  }
+  
+  formatFeatures(features: any[]): any[] {
+    if (!features || features.length === 0) return []; // Ensure it's always an array
+  
+    const groupedFeatures: { [key: string]: string[] } = {};
+  
+    features.forEach(featureItem => {
+      if (!featureItem.group) return; // Ensure group exists
+      if (!groupedFeatures[featureItem.group]) {
+        groupedFeatures[featureItem.group] = [];
+      }
+      groupedFeatures[featureItem.group].push(featureItem.feature);
+    });
+  
+    return Object.entries(groupedFeatures).map(([group, features]) => ({
+      group,
+      features: features.join(", "), // Combine as a comma-separated string
+    }));
+  }
+
 }
