@@ -7,23 +7,34 @@
         </button>
     </div>
 
-    <!-- Rating Section 1 -->
-    <div class="rating-section">
-        <p>Εύκολο στη χρήση</p>
+    <!-- Overall Rating -->
+    <div class="rating-section total-rating">
+        <p>Συνολική Αξιολόγηση</p>
         <div class="stars">
-            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('easeOfUse', star)"
-                [ngClass]="{'selected': easeOfUseRating >= star}">
+            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('totalRating', star)"
+                [class.selected]="star <= totalRating">
                 star
             </mat-icon>
         </div>
     </div>
 
-    <!-- Rating Section 2 -->
+    <!-- Ease of Use -->
+    <div class="rating-section">
+        <p>Εύκολο στη χρήση</p>
+        <div class="stars">
+            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('easeOfUse', star)"
+                [class.selected]="star <= easeOfUseRating">
+                star
+            </mat-icon>
+        </div>
+    </div>
+
+    <!-- True to Features -->
     <div class="rating-section">
         <p>Αληθινά Χαρακτηριστικά</p>
         <div class="stars">
             <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating('trueFeatures', star)"
-                [ngClass]="{'selected': trueFeaturesRating >= star}">
+                [class.selected]="star <= trueFeaturesRating">
                 star
             </mat-icon>
         </div>
