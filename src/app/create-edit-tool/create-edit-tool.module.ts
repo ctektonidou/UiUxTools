@@ -10,6 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CreateEditToolComponent } from "./create-edit-tool.component";
 import { OverlayModule } from "@angular/cdk/overlay";
+import { MatOptionModule } from "@angular/material/core";
 
 const routes: Routes = [
     { path: '', component: CreateEditToolComponent }
@@ -26,7 +27,8 @@ const routes: Routes = [
         MatFormFieldModule,
         ReactiveFormsModule,
         MatCheckboxModule,
-        MatIconModule
+        MatIconModule,
+        MatOptionModule
     ],
     exports: [CreateEditToolComponent]
 })

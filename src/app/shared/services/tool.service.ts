@@ -19,8 +19,8 @@ export class ToolService {
     }
 
     // Create a new tool
-    createTool(tool: Tool): Observable<Tool> {
-        return this.http.post<Tool>(this.apiUrl, tool);
+    createTool(formData: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/tools`, formData);
     }
 
     // Update an existing tool
