@@ -2,15 +2,14 @@
     <h1>{{ isEditMode ? 'Επεξεργασία Εργαλείου' : 'Εισαγωγή Νέου Εργαλείου' }}</h1>
 
     <form [formGroup]="toolForm" (ngSubmit)="onSubmit()">
-        <!-- Section Layout -->
         <div class="form-sections">
 
             <!-- Left Section: Image Upload -->
             <div class="left-section">
                 <div class="image-upload">
                     <div class="image-preview">
-                        <img *ngIf="toolForm.get('imageUrl')?.value" [src]="toolForm.get('imageUrl')?.value"
-                            alt="Tool Image">
+                        <img *ngIf="toolForm.get('imageUrl')?.value" 
+                             [src]="toolForm.get('imageUrl')?.value" alt="Tool Image">
                         <div *ngIf="!toolForm.get('imageUrl')?.value" class="placeholder">
                             <mat-icon>image</mat-icon>
                         </div>
@@ -39,32 +38,27 @@
                 </div>
             </div>
 
-            <!-- Right Section: Search Criteria -->
+            <!-- Right Section: Dynamic Feature Selection -->
             <div class="right-section">
                 <h3>Κριτήρια Αναζήτησης</h3>
 
-                <label for="targetAudience">Target Audience</label>
-                <select id="targetAudience" formControlName="targetAudience" class="custom-select">
-                    <option value="Beginners">Beginners</option>
-                    <option value="Professionals">Professionals</option>
-                </select>
+                <div *ngFor="let group of featureGroups">
+                    <label [for]="'featureGroup' + group.id">{{ group.name }}</label>
+                    <select [id]="'featureGroup' + group.id" 
+                            [formControlName]="'featureGroup' + group.id" 
+                            class="custom-select">
+                        <option *ngFor="let item of featureItems[group.id]" 
+                                [value]="item.name">
+                            {{ item.name }}
+                        </option>
+                    </select>
+                </div>
 
-                <label for="platformSupport">Platform Support</label>
-                <select id="platformSupport" formControlName="platformSupport" class="custom-select">
-                    <option value="Windows">Windows</option>
-                    <option value="MacOS">MacOS</option>
-                </select>
-
-                <label for="pricingModel">Pricing Model</label>
-                <select id="pricingModel" formControlName="pricingModel" class="custom-select">
-                    <option value="Free">Free</option>
-                    <option value="Paid">Paid</option>
-                </select>
-
+                <!-- Checkboxes
                 <div class="checkbox-group">
                     <mat-checkbox formControlName="animation">Animation</mat-checkbox>
                     <mat-checkbox formControlName="wireframing">Wireframing</mat-checkbox>
-                </div>
+                </div> -->
             </div>
         </div>
 

@@ -14,7 +14,7 @@ export class ToolService {
 
     // Get a tool by ID
     getToolById(id: string): Observable<Tool> {
-        return this.http.get<Tool>(`${this.apiUrl}/${id}`);
+        return this.http.get<Tool>(`${this.apiUrl}/tool/${id}`);
     }
 
     // Create a new tool
