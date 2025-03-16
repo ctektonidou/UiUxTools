@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SearchItem } from '../../shared/models/search-item.model';
 import { DecisionPopupComponent } from '../../decision-popup/decision-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DecisionPopupType } from '../../shared/enums/desicion-popup-type.enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PassCompareListService } from '../../shared/services/pass-compare-list.service';
 import { Router } from '@angular/router';
+import { Tool } from '../../shared/interfaces/get-all-tools';
+import { SearchItem } from '../../shared/models/search-item.model';
 
 @Component({
   selector: 'app-search-item',

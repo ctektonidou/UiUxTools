@@ -1,8 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetAllToolsResponse, Tool } from "../interfaces/get-all-tools";
 import { User } from "../interfaces/user";
+import { SearchItem } from "../models/search-item.model";
 
 @Injectable({
     providedIn: 'root'
@@ -59,7 +60,11 @@ export class ToolService {
 
     //get tools; details for compare
     getToolComparison(toolIds: number[]): Observable<any> {
-        console.log("Sending toolIds to API:", JSON.stringify(toolIds)); // Debugging
         return this.http.post<any>(`${this.apiUrl}/tools/compare`, toolIds);
+    }
+
+    //search tools
+    getToolsByFeatureItems(ids: number[]): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/tools/searchByFeatures`, ids);
     }
 }
