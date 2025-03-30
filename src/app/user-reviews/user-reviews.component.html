@@ -3,11 +3,11 @@
         <h2>Αξιολογήσεις</h2>
         <div class="d-flex align-items-center rate">
             <span class="stars">
-                <mat-icon *ngFor="let star of getStars(reviewGrade); let i = index">
+                <mat-icon *ngFor="let star of getStars(tool.reviewGrade); let i = index">
                     {{ star }}
                 </mat-icon>
             </span>
-            <span>{{reviewGrade}}</span>
+            <span>{{tool.reviewGrade}} ({{tool.reviewCount}})</span>
         </div>
     </div>
 

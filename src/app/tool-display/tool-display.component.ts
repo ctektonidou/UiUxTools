@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { PassCompareListService } from '../shared/services/pass-compare-list.service';
-import { Router } from '@angular/router';
+import { ToolService } from '../shared/services/tool.service';
 import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { EvaluationsService } from '../shared/services/evaluations.service';
 
 @Component({
   selector: 'app-tool-display',
@@ -13,33 +15,68 @@ import { EvaluationComponent } from '../evaluation/evaluation.component';
   styleUrls: ['./tool-display.component.scss']
 })
 export class ToolDisplayComponent implements OnInit {
-
   compareList: any[] = [];
-
-  tool = {
-    imageUrl: 'assets/drawio.png',
-    name: 'Draw.io',
-    description: 'Free online diagram software for making flowcharts...',
-    link: 'https://app.diagrams.net/',
-    targetAudience: 'Beginners',
-    platformSupport: 'Windows, MacOS',
-    pricingModel: 'Free (Limited Features)',
-    useCases: 'UI Design',
-    animation: false,
-    reviewGrade: 3
-  };
+  tool: any = {};
+  featureGroups: string[] = [];
+  featureMap: { [key: string]: string } = {}; // group -> comma-separated features
+  reviews: any[] = [];
+  toolLoaded: boolean = false;
 
   constructor(
+    private route: ActivatedRoute,
+    private toolService: ToolService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private passCompareListService: PassCompareListService,
-    private router: Router
+    private evaluationsService: EvaluationsService
   ) { }
 
-  ngOnInit() {
-    this.passCompareListService.selectedCompareList$.subscribe(res => {
-      this.compareList = Array.isArray(res) ? res : [];
-    })
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.loadTool(id);
+      this.loadReviews(id);
+    }
+  }
+
+  loadTool(id: number): void {
+    this.toolService.getToolWithDetails(id).subscribe(tool => {
+      this.tool = {
+        name: tool.toolName,
+        imageUrl: tool.image,
+        description: tool.description,
+        link: tool.link,
+        reviewGrade: tool.finalRating.toFixed(1),
+        reviewCount: tool.reviewCount
+      };
+
+      // Group and format features by group name
+      const groupedFeatures: { [key: string]: string[] } = {};
+
+      tool.features.forEach((feature: any) => {
+        const group = feature.group;
+        const value = feature.feature;
+
+        if (!groupedFeatures[group]) {
+          groupedFeatures[group] = [];
+        }
+        groupedFeatures[group].push(value);
+      });
+
+      this.featureMap = {};
+      this.featureGroups = Object.keys(groupedFeatures);
+
+      for (const group of this.featureGroups) {
+        this.featureMap[group] = groupedFeatures[group].join(', ');
+      }
+      this.toolLoaded = true;
+    });
+  }
+
+  loadReviews(id: number): void {
+    this.evaluationsService.getReviewsByToolId(id).subscribe(res => {
+      this.reviews = res;
+    });
   }
 
   openEvaluationDialog(tool: any) {
@@ -64,7 +101,7 @@ export class ToolDisplayComponent implements OnInit {
   }
 
   showLimitPopup() {
-    const dialogRef = this.dialog.open(DecisionPopupComponent, {
+    this.dialog.open(DecisionPopupComponent, {
       width: '600px',
       data: {
         type: DecisionPopupType.INFO,
@@ -77,7 +114,7 @@ export class ToolDisplayComponent implements OnInit {
   }
 
   showDuplicatePopup() {
-    const dialogRef = this.dialog.open(DecisionPopupComponent, {
+    this.dialog.open(DecisionPopupComponent, {
       width: '600px',
       data: {
         type: DecisionPopupType.INFO,

@@ -6,30 +6,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./user-reviews.component.scss']
 })
 export class UserReviewsComponent {
-  @Input() reviewGrade: number = 0;
-
-  reviews = [
-    {
-      reviewGrade: 3,
-      userImage: 'assets/user1.png',
-      username: 'User1234',
-      comment: 'Nice tool, useful, easy to use. Love it!',
-      easeOfUse: 3,
-      trueCharacteristics: 4
-    },
-    {
-      reviewGrade: 4,
-      userImage: 'assets/user2.png',
-      username: 'User5678',
-      comment: 'Good but could be improved in some areas.',
-      easeOfUse: 3,
-      trueCharacteristics: 2
-    }
-  ];
+  @Input() tool: any;
+  @Input() reviews: any[] = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.tool);
+  }
 
   getStars(rating: number): string[] {
     let stars: string[] = [];

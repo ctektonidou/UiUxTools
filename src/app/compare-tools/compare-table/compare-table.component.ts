@@ -12,7 +12,6 @@ export class CompareTableComponent {
   featureGroups: string[] = [];
 
   ngOnInit() {
-    console.log("Received compareList:", this.compareList);
     this.prepareComparisonData();
   }
 
@@ -36,8 +35,6 @@ export class CompareTableComponent {
 
       return { ...tool, featureMap };
     });
-
-    console.log("Formatted Table Data:", this.formattedCompareList);
   }
 
 }

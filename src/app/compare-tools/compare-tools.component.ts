@@ -59,14 +59,12 @@ export class CompareToolsComponent implements OnInit {
   getToolDetails(compareListIds: number[]) {
     this.toolService.getToolComparison(compareListIds).subscribe(response => {
       if (response) {
-        console.log("Before Formatting:", response);
   
         this.compareDetailListFinal = response.map((tool: any) => ({
           ...tool,
           formattedFeatures: this.formatFeatures(tool.features), // 🛠 Format before passing
         }));
-  
-        console.log("After Formatting:", this.compareDetailListFinal);
+
       }
     });
   }
@@ -88,6 +86,10 @@ export class CompareToolsComponent implements OnInit {
       group,
       features: features.join(", "), // Combine as a comma-separated string
     }));
+  }
+
+  goToTool(item: SearchItem) {
+    this.router.navigate(['/tools/' + item.id + '/display']);
   }
 
 }

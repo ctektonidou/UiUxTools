@@ -1,5 +1,5 @@
 <div class="tool-card" click="goToTool(tool)">
-  <img [src]="tool.logo" alt="{{ tool.name }}" class="tool-logo">
+  <img [src]="'http://localhost:8081' + tool.logo" alt="{{ tool.name }}" class="tool-logo">
   <h3>{{ tool.name }}</h3>
 
   <p class="rating">

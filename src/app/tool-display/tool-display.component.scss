@@ -71,14 +71,16 @@
 }
 
 .tool-image {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 8px;
+    margin-right: 20px;
 }
 
 .tool-description {
     flex-grow: 1;
     font-size: 16px;
+    max-width: 1100px;
 }
 
 /* Characteristics Table */
@@ -117,4 +119,22 @@
     font-size: 22px;
     color: #3e721d;
     cursor: pointer;
+}
+
+.tool-rating {
+    margin-left: 15px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px;
+    color: #f4b400;
+
+    .star {
+        font-size: 20px;
+    }
+
+    .rating-number {
+        margin-left: 5px;
+        font-size: 16px;
+        color: #333;
+    }
 }

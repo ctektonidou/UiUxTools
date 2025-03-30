@@ -67,4 +67,10 @@ export class ToolService {
     getToolsByFeatureItems(ids: number[]): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/tools/searchByFeatures`, ids);
     }
+
+    //tool display
+    getToolWithDetails(id: number) {
+        return this.http.get<any>(`${this.apiUrl}/tools/${id}/details`);
+    }
+
 }

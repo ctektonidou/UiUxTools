@@ -1,55 +1,47 @@
-<div class="tool-container">
-    <!-- Tool Header -->
-    <div class="tool-header">
-        <img class="tool-image" [src]="tool.imageUrl" alt="{{ tool.name }}">
-        <div class="tool-info">
-            <div class="tool-title">
-                <h1>{{ tool.name }}</h1>
-                <a class="tool-link" [href]="tool.link" target="_blank">🔗 Visit Website</a>
-            </div>
-            <h2 class="section-title">Περιγραφή</h2>
-            <p class="tool-description">{{ tool.description }}</p>
-        </div>
+<div class="tool-container" *ngIf="toolLoaded">
+  <!-- Tool Header -->
+  <div class="tool-header">
+    <img class="tool-image" [src]="'http://localhost:8081' + tool.imageUrl" alt="{{ tool.name }}">
+    <div class="tool-info">
+      <div class="tool-title">
+        <h1>
+          {{ tool.name }}
+          <span class="tool-rating">
+            <mat-icon *ngFor="let i of [1,2,3,4,5]" class="star">{{ i <= tool.reviewGrade ? 'star' : 'star_border'
+                }}</mat-icon>
+                <span class="rating-number">{{ tool.reviewGrade }} ({{ tool.reviewCount }})</span>
+          </span>
+        </h1>
+      </div>
 
-        <!-- Action Buttons -->
-        <div class="tool-actions">
-            <mat-icon class="swap-icon" (click)="addItemToCompareList(tool)">compare_arrows</mat-icon>
-            <button mat-button class="save-btn" (click)="openEvaluationDialog(tool)">
-                Αξιολόγηση Εργαλείου
-            </button>
-        </div>
+      <h2 class="section-title">Περιγραφή</h2>
+      <p class="tool-description">{{ tool.description }}</p>
     </div>
 
-    <!-- Tool Characteristics Section -->
-    <div class="d-flex">
-        <h2 class="section-title">Επίσκεψη</h2>
-        <span class="tool-link"><a [href]="tool.link" target="_blank">{{ tool.link }}</a></span>
+    <!-- Action Buttons -->
+    <div class="tool-actions">
+      <mat-icon class="swap-icon" (click)="addItemToCompareList(tool)">compare_arrows</mat-icon>
+      <button mat-button class="save-btn" (click)="openEvaluationDialog(tool)">
+        Αξιολόγηση Εργαλείου
+      </button>
     </div>
+  </div>
 
-    <h2 class="section-title">Χαρακτηριστικά</h2>
-    <table class="tool-characteristics">
-        <tr>
-            <th>Target Audience</th>
-            <td>{{ tool.targetAudience }}</td>
-        </tr>
-        <tr>
-            <th>Platform Support</th>
-            <td>{{ tool.platformSupport }}</td>
-        </tr>
-        <tr>
-            <th>Pricing Model</th>
-            <td>{{ tool.pricingModel }}</td>
-        </tr>
-        <tr>
-            <th>Specific Use Cases</th>
-            <td>{{ tool.useCases }}</td>
-        </tr>
-        <tr>
-            <th>Animation</th>
-            <td>{{ tool.animation ? 'Ναι' : 'Όχι' }}</td>
-        </tr>
-    </table>
+  <!-- Tool Characteristics Section -->
+  <div class="d-flex">
+    <h2 class="section-title">Επίσκεψη</h2>
+    <span class="tool-link"><a [href]="tool.link" target="_blank">Πατήστε εδώ</a></span>
+  </div>
 
-    <!-- User Reviews Section -->
-    <app-user-reviews [reviewGrade]="tool.reviewGrade"></app-user-reviews>
+  <h2 class="section-title">Χαρακτηριστικά</h2>
+  <table class="tool-characteristics">
+    <tr *ngFor="let group of featureGroups">
+      <th>{{ group }}</th>
+      <td>{{ featureMap[group] || 'N/A' }}</td>
+    </tr>
+  </table>
+
+  <!-- User Reviews Section -->
+  <app-user-reviews *ngIf="tool" [tool]="tool" [reviews]="reviews">
+  </app-user-reviews>
 </div>
