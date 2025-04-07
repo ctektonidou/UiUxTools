@@ -13,19 +13,13 @@ export class ToolService {
 
     constructor(private http: HttpClient) { }
 
-    // Get a tool by ID
-    getToolById(id: string): Observable<Tool> {
-        return this.http.get<Tool>(`${this.apiUrl}/tool/${id}`);
-    }
-
     // Create a new tool
     createTool(formData: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/tools`, formData);
     }
 
-    // Update an existing tool
-    updateTool(id: string, tool: Tool): Observable<Tool> {
-        return this.http.put<Tool>(`${this.apiUrl}/${id}`, tool);
+    updateTool(id: string, toolData: any) {
+        return this.http.put(`${this.apiUrl}/tools/${id}`, toolData);
     }
 
     // Delete a tool
@@ -73,4 +67,7 @@ export class ToolService {
         return this.http.get<any>(`${this.apiUrl}/tools/${id}/details`);
     }
 
+    getToolById(id: string): Observable<any> {
+        return this.http.get(`${this.apiUrl}/tools/${id}/edit`);
+    }
 }

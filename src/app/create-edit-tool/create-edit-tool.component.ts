@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolService } from '../shared/services/tool.service';
 import { FeatureService } from '../shared/services/feature.service';
+import { Tool } from '../shared/interfaces/get-all-tools';
 
 @Component({
   selector: 'app-create-edit-tool',
@@ -59,28 +60,59 @@ export class CreateEditToolComponent implements OnInit {
   loadFeatureGroups(): void {
     this.featureService.getFeatureGroups().subscribe(groups => {
       this.featureGroups = groups;
-
-      // Ensure featureSelections is a FormGroup
       const featureSelectionsForm = this.toolForm.get('featureSelections') as FormGroup;
-
+  
+      let loaded = 0;
+      const totalGroups = groups.length;
+  
       this.featureGroups.forEach(group => {
-        featureSelectionsForm.addControl(group.id.toString(), new FormControl([])); // Initialize as empty array
-        this.loadFeatureItems(group.id);
+        featureSelectionsForm.addControl(group.id.toString(), new FormControl([]));
+  
+        this.loadFeatureItems(group.id, () => {
+          loaded++;
+          if (loaded === totalGroups && this.isEditMode) {
+            this.loadToolData();
+          }
+        });
       });
     });
   }
+  
 
-  loadFeatureItems(featureGroupId: number): void {
+  loadFeatureItems(featureGroupId: number, callback?: () => void): void {
     this.featureService.getFeatureItemsByGroup(featureGroupId).subscribe((items: any) => {
       this.featureItems[featureGroupId] = items;
+      if (callback) callback();
     });
   }
 
   loadToolData(): void {
     this.toolService.getToolById(this.toolId).subscribe(tool => {
-      this.toolForm.patchValue(tool);
+      this.toolForm.patchValue({
+        name: tool.name,
+        description: tool.description,
+        productLink: tool.productLink,
+        imageUrl: 'http://localhost:8081' + tool.image
+      });
+  
+      // Set the selected features
+      const featureSelectionsForm = this.toolForm.get('featureSelections') as FormGroup;
+      const groupedByFeatureGroup: { [groupId: number]: number[] } = {};
+  
+      for (const featureItemId of tool.featureItemIds) {
+        for (const groupId in this.featureItems) {
+          if (this.featureItems[groupId].some(item => item.featureItemId === featureItemId)) {
+            if (!groupedByFeatureGroup[groupId]) groupedByFeatureGroup[groupId] = [];
+            groupedByFeatureGroup[groupId].push(featureItemId);
+          }
+        }
+      }
+  
+      for (const groupId in groupedByFeatureGroup) {
+        featureSelectionsForm.patchValue({ [groupId]: groupedByFeatureGroup[groupId] });
+      }
     });
-  }
+  }  
 
   //Function to check if a feature item is selected
   isFeatureSelected(groupId: number, featureItemId: number): boolean {
@@ -102,30 +134,28 @@ export class CreateEditToolComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.selectedFile) {
-      this.imageRequiredError = true; // ✅ Show error if no image is selected
-      return;
-    } else {
-      this.imageRequiredError = false; // ✅ Hide error if image is selected
-    }
-
-    // ✅ Create a tool object
+    if (this.toolForm.invalid) return;
+  
     const toolData = {
       name: this.toolForm.value.name,
       description: this.toolForm.value.description,
       productLink: this.toolForm.value.productLink,
       featureItemIds: Object.values(this.toolForm.value.featureSelections).flat(),
-      image: this.imageBase64 // ✅ Send the image as a Base64 string
+      image: this.imageBase64 || this.toolForm.value.imageUrl // preserve original if unchanged
     };
-
-    this.toolService.createTool(toolData).subscribe({
+  
+    const request = this.isEditMode
+      ? this.toolService.updateTool(this.toolId, toolData)
+      : this.toolService.createTool(toolData);
+  
+    request.subscribe({
       next: (response) => {
-        alert('Το εργαλείο δημιουργήθηκε με επιτυχία!');
+        alert(`Το εργαλείο ${this.isEditMode ? 'ενημερώθηκε' : 'δημιουργήθηκε'} με επιτυχία!`);
         this.router.navigate(['/tools', response.toolId, 'display']);
       },
       error: (err) => {
-        console.error('Error creating tool:', err);
-        alert('Σφάλμα κατά τη δημιουργία του εργαλείου!');
+        console.error('Error saving tool:', err);
+        alert('Σφάλμα κατά την αποθήκευση του εργαλείου!');
       }
     });
   }
@@ -146,15 +176,15 @@ export class CreateEditToolComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = () => {
-        this.imageBase64 = reader.result as string; // ✅ Store Base64 data
+        this.imageBase64 = reader.result as string; // Store Base64 data
         this.toolForm.patchValue({ imageUrl: this.imageBase64 });
         this.toolForm.get('imageUrl')?.updateValueAndValidity();
-        this.imageRequiredError = false; // ✅ Hide error
+        this.imageRequiredError = false; // Hide error
       };
-      reader.readAsDataURL(file); // ✅ Convert to Base64
+      reader.readAsDataURL(file); // Convert to Base64
     } else {
       this.toolForm.patchValue({ imageUrl: '' });
-      this.imageRequiredError = true; // ✅ Show error
+      this.imageRequiredError = true; // Show error
     }
   }
 
