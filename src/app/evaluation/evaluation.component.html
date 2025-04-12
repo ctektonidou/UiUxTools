@@ -48,6 +48,6 @@
 
     <!-- Submit Button -->
     <div class="submit-section">
-        <button mat-raised-button class="submit-btn" (click)="submitReview()">Δημοσίευση</button>
+        <button mat-raised-button class="submit-btn" (click)="submitReview()" [disabled]="!isFormValid">Δημοσίευση</button>
     </div>
 </mat-dialog-content>

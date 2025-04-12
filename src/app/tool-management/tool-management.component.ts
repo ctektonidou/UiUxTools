@@ -51,12 +51,11 @@ export class ToolManagementComponent {
   }
 
   deleteTool(tool: Tool) {
-    console.log("delete");
-    // this.toolService.deleteTool(tool.toolId).subscribe(response => {// TODO TEST
-    //   if (response) {
-    //     window.location.reload();
-    //   }
-    // });
+    this.toolService.deleteTool(tool.toolId).subscribe(response => {
+      if (response) {
+        window.location.reload();
+      }
+    });
   }
 
   editTool(tool: Tool) {

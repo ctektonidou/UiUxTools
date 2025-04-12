@@ -15,4 +15,8 @@ export class EvaluationsService {
         return this.http.get<any[]>(`http://localhost:8081/api/evaluation?toolId=${toolId}`);
     }
 
+    submitReview(evaluation: any): Observable<any> {
+        return this.http.post(`${this.apiUrl}/evaluation`, evaluation);
+      }      
+
 }

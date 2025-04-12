@@ -12,7 +12,6 @@ export class UserReviewsComponent {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.tool);
   }
 
   getStars(rating: number): string[] {

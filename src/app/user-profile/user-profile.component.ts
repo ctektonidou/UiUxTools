@@ -69,7 +69,6 @@ export class UserProfileComponent implements OnInit {
 
   submitProfile() {
     if (this.profileForm.valid) {
-      console.log('Updated Profile:', this.profileForm.value);
       this.isEditing = false;
       this.profileForm.disable(); // Disable form after update
       this.updateUserDetails();
@@ -106,8 +105,6 @@ export class UserProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.submitProfile();
-      } else {
-        console.log('Update cancelled.');
       }
     });
   }

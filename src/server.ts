@@ -35,7 +35,7 @@ app.get('**', async (req, res, next) => {
         provideServerRendering(),
         { provide: APP_BASE_HREF, useValue: req.baseUrl }
       ]
-    }), { document }); // ✅ Pass document inside an options object
+    }), { document }); // Pass document inside an options object
     
     res.send(html);
   } catch (err) {
@@ -49,6 +49,6 @@ app.get('**', async (req, res, next) => {
 const port = process.env['PORT'] || 4000;
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   app.listen(port, () => {
-    console.log(`✅ Node Express server running at http://localhost:${port}`);
+    console.log(`Node Express server running at http://localhost:${port}`);
   });
 }

@@ -42,6 +42,7 @@ export class ToolDisplayComponent implements OnInit {
   loadTool(id: number): void {
     this.toolService.getToolWithDetails(id).subscribe(tool => {
       this.tool = {
+        toolId: tool.toolId,
         name: tool.toolName,
         imageUrl: tool.image,
         description: tool.description,
@@ -80,11 +81,18 @@ export class ToolDisplayComponent implements OnInit {
   }
 
   openEvaluationDialog(tool: any) {
-    this.dialog.open(EvaluationComponent, {
+    const dialogRef = this.dialog.open(EvaluationComponent, {
       width: '500px',
       panelClass: 'custom-dialog-container',
       backdropClass: 'custom-dialog-backdrop',
       data: { tool }
+    });
+
+    dialogRef.afterClosed().subscribe((wasReviewSubmitted: boolean) => {
+      if (wasReviewSubmitted) {
+        this.loadReviews(tool.toolId);
+        this.loadTool(tool.toolId);
+      }
     });
   }
 

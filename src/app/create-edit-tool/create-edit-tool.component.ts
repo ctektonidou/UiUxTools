@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToolService } from '../shared/services/tool.service';
 import { FeatureService } from '../shared/services/feature.service';
 import { Tool } from '../shared/interfaces/get-all-tools';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
+import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-edit-tool',
@@ -32,7 +36,9 @@ export class CreateEditToolComponent implements OnInit {
     private toolService: ToolService,
     private featureService: FeatureService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -61,13 +67,13 @@ export class CreateEditToolComponent implements OnInit {
     this.featureService.getFeatureGroups().subscribe(groups => {
       this.featureGroups = groups;
       const featureSelectionsForm = this.toolForm.get('featureSelections') as FormGroup;
-  
+
       let loaded = 0;
       const totalGroups = groups.length;
-  
+
       this.featureGroups.forEach(group => {
         featureSelectionsForm.addControl(group.id.toString(), new FormControl([]));
-  
+
         this.loadFeatureItems(group.id, () => {
           loaded++;
           if (loaded === totalGroups && this.isEditMode) {
@@ -77,7 +83,7 @@ export class CreateEditToolComponent implements OnInit {
       });
     });
   }
-  
+
 
   loadFeatureItems(featureGroupId: number, callback?: () => void): void {
     this.featureService.getFeatureItemsByGroup(featureGroupId).subscribe((items: any) => {
@@ -94,11 +100,11 @@ export class CreateEditToolComponent implements OnInit {
         productLink: tool.productLink,
         imageUrl: 'http://localhost:8081' + tool.image
       });
-  
+
       // Set the selected features
       const featureSelectionsForm = this.toolForm.get('featureSelections') as FormGroup;
       const groupedByFeatureGroup: { [groupId: number]: number[] } = {};
-  
+
       for (const featureItemId of tool.featureItemIds) {
         for (const groupId in this.featureItems) {
           if (this.featureItems[groupId].some(item => item.featureItemId === featureItemId)) {
@@ -107,12 +113,12 @@ export class CreateEditToolComponent implements OnInit {
           }
         }
       }
-  
+
       for (const groupId in groupedByFeatureGroup) {
         featureSelectionsForm.patchValue({ [groupId]: groupedByFeatureGroup[groupId] });
       }
     });
-  }  
+  }
 
   //Function to check if a feature item is selected
   isFeatureSelected(groupId: number, featureItemId: number): boolean {
@@ -135,7 +141,7 @@ export class CreateEditToolComponent implements OnInit {
 
   onSubmit(): void {
     if (this.toolForm.invalid) return;
-  
+
     const toolData = {
       name: this.toolForm.value.name,
       description: this.toolForm.value.description,
@@ -143,19 +149,34 @@ export class CreateEditToolComponent implements OnInit {
       featureItemIds: Object.values(this.toolForm.value.featureSelections).flat(),
       image: this.imageBase64 || this.toolForm.value.imageUrl // preserve original if unchanged
     };
-  
+
     const request = this.isEditMode
       ? this.toolService.updateTool(this.toolId, toolData)
       : this.toolService.createTool(toolData);
-  
+
     request.subscribe({
       next: (response) => {
-        alert(`Το εργαλείο ${this.isEditMode ? 'ενημερώθηκε' : 'δημιουργήθηκε'} με επιτυχία!`);
-        this.router.navigate(['/tools', response.toolId, 'display']);
+        this.snackBar.open(`Το εργαλείο ${this.isEditMode ? 'ενημερώθηκε' : 'δημιουργήθηκε'} με επιτυχία!`, undefined, {
+          duration: 3000, // hide after 3 seconds
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        if (!this.isEditMode) {
+          this.router.navigate(['/tools', response.toolId, 'display']);
+        }
       },
       error: (err) => {
-        console.error('Error saving tool:', err);
-        alert('Σφάλμα κατά την αποθήκευση του εργαλείου!');
+        this.dialog.open(DecisionPopupComponent, {
+          width: '600px',
+          data: {
+            type: DecisionPopupType.INFO,
+            title: 'Σφάλμα',
+            message: 'Σφάλμα κατά την αποθήκευση του εργαλείου!'
+          },
+          panelClass: 'custom-dialog-container',
+          backdropClass: 'custom-dialog-backdrop',
+        });
       }
     });
   }

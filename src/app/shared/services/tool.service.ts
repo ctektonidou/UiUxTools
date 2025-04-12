@@ -1,9 +1,8 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetAllToolsResponse, Tool } from "../interfaces/get-all-tools";
 import { User } from "../interfaces/user";
-import { SearchItem } from "../models/search-item.model";
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +23,7 @@ export class ToolService {
 
     // Delete a tool
     deleteTool(toolId: number): Observable<any> {
-        return this.http.delete<any>(`${this.apiUrl}/${toolId}`);
+        return this.http.delete<any>(`${this.apiUrl}/tools/${toolId}`);
     }
 
     //Get All Tools

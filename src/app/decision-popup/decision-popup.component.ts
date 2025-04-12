@@ -16,12 +16,12 @@ export class DecisionPopupComponent {
   ) {}
 
   confirm(): void {
-    this.decision.emit(true); // ✅ Emit confirm action
+    this.decision.emit(true); // Emit confirm action
     this.dialogRef.close(true);
   }
 
   cancel(): void {
-    this.decision.emit(false); // ✅ Emit cancel action
+    this.decision.emit(false); // Emit cancel action
     this.dialogRef.close(false);
   }
 }
