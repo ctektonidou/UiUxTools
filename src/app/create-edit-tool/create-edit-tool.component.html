@@ -59,7 +59,10 @@
                             <li *ngFor="let item of featureItems[group.id]" class="dropdown-item">
                                 <input type="checkbox" [id]="'feature' + item.featureItemId"
                                     [checked]="isFeatureSelected(group.id, item.featureItemId)"
-                                    (change)="handleFeatureSelect($event, group.id, item.featureItemId)">
+                                    (change)="handleFeatureSelect($event, group.id, item.featureItemId)" [disabled]="
+                                    isSingleSelection(group.id) &&
+                                    isFeatureSelected(group.id, item.featureItemId) === false &&
+                                    getFeatureSelectionControl(group.id).value.length > 0">
                                 <label [for]="'feature' + item.featureItemId" class="ms-2">{{ item.name }}</label>
                             </li>
                         </ul>

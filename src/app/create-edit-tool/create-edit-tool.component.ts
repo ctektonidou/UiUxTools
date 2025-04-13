@@ -19,11 +19,12 @@ export class CreateEditToolComponent implements OnInit {
   isEditMode = false;
   toolId!: string;
   featureGroups: any[] = [];
-  featureItems: { [key: number]: any[] } = {}; // Stores feature items by group ID
+  featureItems: { [key: number]: any[] } = {}; // Store feature items by group ID
   selectedFile: File | null = null;
   imageRequiredError: boolean = false;
-  dropdownStates: { [key: number]: boolean } = {}; // Stores dropdown open/close state
+  dropdownStates: { [key: number]: boolean } = {}; // Store dropdown open/close state
   imageBase64: string | null = null; // Store Base64 image
+  singleSelectionGroupIds: number[] = []; //Store One Value Filters
 
   toggleDropdown(groupId: number): void {
     this.dropdownStates[groupId] = !this.dropdownStates[groupId]; // Toggle state
@@ -88,9 +89,23 @@ export class CreateEditToolComponent implements OnInit {
   loadFeatureItems(featureGroupId: number, callback?: () => void): void {
     this.featureService.getFeatureItemsByGroup(featureGroupId).subscribe((items: any) => {
       this.featureItems[featureGroupId] = items;
+      // Detect if this group is Yes/No only
+      const itemNames = items.map((item: any) => item.name.toLowerCase().trim());
+      if (
+        itemNames.length === 2 &&
+        itemNames.includes('yes') &&
+        itemNames.includes('no')
+      ) {
+        this.singleSelectionGroupIds.push(featureGroupId);
+      }
       if (callback) callback();
     });
   }
+
+  isSingleSelection(groupId: number): boolean {
+    return this.singleSelectionGroupIds.includes(groupId);
+  }
+
 
   loadToolData(): void {
     this.toolService.getToolById(this.toolId).subscribe(tool => {
@@ -128,15 +143,21 @@ export class CreateEditToolComponent implements OnInit {
 
   onFeatureSelect(groupId: number, featureItemId: number, isChecked: boolean): void {
     const featureSelectionsForm = this.toolForm.get('featureSelections') as FormGroup;
-    let selectedItems: number[] = featureSelectionsForm.get(groupId.toString())?.value || [];
 
-    if (isChecked) {
-      selectedItems.push(featureItemId); // Add item if checked
+    if (this.isSingleSelection(groupId)) {
+      const selectedItems = isChecked ? [featureItemId] : [];
+      featureSelectionsForm.patchValue({ [groupId]: selectedItems });
     } else {
-      selectedItems = selectedItems.filter(id => id !== featureItemId); // Remove item if unchecked
-    }
+      let selectedItems: number[] = featureSelectionsForm.get(groupId.toString())?.value || [];
 
-    featureSelectionsForm.patchValue({ [groupId]: selectedItems });
+      if (isChecked) {
+        selectedItems.push(featureItemId);
+      } else {
+        selectedItems = selectedItems.filter(id => id !== featureItemId);
+      }
+
+      featureSelectionsForm.patchValue({ [groupId]: selectedItems });
+    }
   }
 
   onSubmit(): void {
