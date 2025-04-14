@@ -7,6 +7,7 @@ import { PassCompareListService } from '../../shared/services/pass-compare-list.
 import { Router } from '@angular/router';
 import { Tool } from '../../shared/interfaces/get-all-tools';
 import { SearchItem } from '../../shared/models/search-item.model';
+import { FavoriteToolsService } from '../../shared/services/favorite-tools.service';
 
 @Component({
   selector: 'app-search-item',
@@ -15,6 +16,7 @@ import { SearchItem } from '../../shared/models/search-item.model';
 })
 export class SearchItemComponent {
   @Input() item!: SearchItem;
+  @Input() favoriteToolIds: number[] = [];
   @Output() hasCompareList = new EventEmitter<SearchItem[]>();
   compareList: SearchItem[] = [];
 
@@ -22,7 +24,8 @@ export class SearchItemComponent {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private passCompareListService: PassCompareListService,
-    private router: Router
+    private router: Router,
+    private favoriteService: FavoriteToolsService
   ) { }
 
   ngOnInit() {
@@ -82,5 +85,21 @@ export class SearchItemComponent {
       panelClass: ['success-snackbar']
     });
   }
+
+  toggleFavorite(item: SearchItem) {
+    const userId = Number(localStorage.getItem('userId'));
+    const isFav = this.favoriteToolIds.includes(item.id);
+  
+    if (isFav) {
+      this.favoriteService.removeFavorite(userId, item.id).subscribe(() => {
+        this.favoriteToolIds = this.favoriteToolIds.filter(id => id !== item.id);
+      });
+    } else {
+      this.favoriteService.addFavorite(userId, item.id).subscribe(() => {
+        this.favoriteToolIds.push(item.id);
+      });
+    }
+  }
+  
 
 }

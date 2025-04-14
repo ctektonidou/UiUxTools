@@ -1,4 +1,10 @@
 <div class="review-card">
+    <!-- Actions only for current user's reviews -->
+    <div *ngIf="review.userId === currentUserId" class="review-actions">
+        <mat-icon class="edit-icon" (click)="onEdit(review)" matTooltip="Επεξεργασία αξιολόγησης">edit</mat-icon>
+        <mat-icon class="delete-icon" (click)="onDelete(review)" matTooltip="Διαγραφή αξιολόγησης">delete</mat-icon>
+    </div>
+
     <div class="d-flex justify-content-between align-items-center">
         <div class="review-header">
             <!-- <img class="user-avatar" [src]="review.userImage" alt="User Avatar"> -->
@@ -13,7 +19,6 @@
             <span>{{review.totalRating}}</span>
         </div>
     </div>
-   
 
     <p class="comment">{{ review.comment }}</p>
 

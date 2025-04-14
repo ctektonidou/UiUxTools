@@ -1,0 +1,13 @@
+.favorites-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Centers horizontally */
+    padding: 0 20px;
+    /* Adds padding on left/right */
+}
+
+.empty-message {
+    padding: 40px 0;
+    text-align: center;
+    color: #555;
+}

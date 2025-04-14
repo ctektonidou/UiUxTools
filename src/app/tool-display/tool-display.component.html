@@ -20,6 +20,9 @@
 
     <!-- Action Buttons -->
     <div class="tool-actions">
+      <mat-icon class="heart-icon" (click)="toggleFavorite()">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </mat-icon>      
       <mat-icon class="swap-icon" (click)="addItemToCompareList(tool)">compare_arrows</mat-icon>
       <button mat-button class="save-btn" (click)="openEvaluationDialog(tool)">
         Αξιολόγηση Εργαλείου
@@ -42,6 +45,8 @@
   </table>
 
   <!-- User Reviews Section -->
-  <app-user-reviews *ngIf="tool" [tool]="tool" [reviews]="reviews">
+  <app-user-reviews *ngIf="tool" [tool]="tool" [reviews]="reviews" [currentUserId]="authService.getUserId() || 0"
+    (refreshReviews)="loadReviews(tool.toolId)">
   </app-user-reviews>
+
 </div>

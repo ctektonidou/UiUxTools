@@ -6,16 +6,14 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { UserReviewsComponent } from "./user-reviews.component";
-import { UserReviewItemComponent } from "./user-review-item/user-review-item.component";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MyReviewsComponent } from "./my-reviews.component";
 
 const routes: Routes = [
-    { path: '', component: UserReviewsComponent }
+    { path: '', component: MyReviewsComponent }
 ];
 
 @NgModule({
-    declarations: [UserReviewsComponent, UserReviewItemComponent],
+    declarations: [MyReviewsComponent],
     imports: [
         RouterModule,
         CommonModule,
@@ -23,9 +21,8 @@ const routes: Routes = [
         MatDialogModule,
         FormsModule,
         MatButtonModule,
-        MatIconModule,
-        MatTooltipModule
+        MatIconModule
     ],
-    exports: [UserReviewsComponent]
+    exports: [MyReviewsComponent]
 })
-export class UserReviewsModule { }
+export class MyReviewsModule { }

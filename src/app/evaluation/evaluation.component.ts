@@ -18,6 +18,8 @@ export class EvaluationComponent {
   easeOfUseRating = 0;
   trueFeaturesRating = 0;
   reviewText = '';
+  isEditMode = false;
+  evaluationId?: number;
 
   constructor(
     public dialogRef: MatDialogRef<EvaluationComponent>,
@@ -28,6 +30,16 @@ export class EvaluationComponent {
     private authService: AuthService
   ) {
     this.tool = data.tool;
+    this.isEditMode = !!data.review;
+
+  if (this.isEditMode && data.review) {
+    const review = data.review;
+    this.totalRating = review.totalRating;
+    this.easeOfUseRating = review.easyToUse;
+    this.trueFeaturesRating = review.trueToChars;
+    this.reviewText = review.comment;
+    this.evaluationId = review.evaluationId;
+  }
   }
 
   setRating(type: string, value: number) {
@@ -66,30 +78,52 @@ export class EvaluationComponent {
       alert('Πρέπει να είστε συνδεδεμένος για να αφήσετε αξιολόγηση.');
       return;
     }
-    this.evaluationsService.submitReview(this.submitReviewReq()).subscribe({
-      next: (res) => {
-        this.snackBar.open('Η αξιολόγηση υποβλήθηκε με επιτυχία!', undefined, {
-          duration: 3000, // hide after 3 seconds
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar']
-        });
-        this.dialogRef.close(true);
-      },
-      error: (err) => {
-        this.dialog.open(DecisionPopupComponent, {
-          width: '600px',
-          data: {
-            type: DecisionPopupType.INFO,
-            title: 'Σφάλμα',
-            message: 'Σφάλμα κατά την υποβολή αξιολόγησης'
-          },
-          panelClass: 'custom-dialog-container',
-          backdropClass: 'custom-dialog-backdrop',
-        });
-      }
-    });
+  
+    const request = this.submitReviewReq();
+  
+    if (this.isEditMode && this.evaluationId) {
+      // Call update API
+      this.evaluationsService.updateReview(this.evaluationId, request).subscribe({
+        next: () => {
+          this.snackBar.open('Η αξιολόγηση ενημερώθηκε με επιτυχία!', undefined, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.dialogRef.close(true);
+        },
+        error: () => this.handleError()
+      });
+    } else {
+      // Call create API
+      this.evaluationsService.submitReview(request).subscribe({
+        next: () => {
+          this.snackBar.open('Η αξιολόγηση υποβλήθηκε με επιτυχία!', undefined, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.dialogRef.close(true);
+        },
+        error: () => this.handleError()
+      });
+    }
   }
+  
+  handleError() {
+    this.dialog.open(DecisionPopupComponent, {
+      width: '600px',
+      data: {
+        type: DecisionPopupType.INFO,
+        title: 'Σφάλμα',
+        message: 'Σφάλμα κατά την αποθήκευση αξιολόγησης'
+      },
+      panelClass: 'custom-dialog-container',
+      backdropClass: 'custom-dialog-backdrop',
+    });
+  }  
 
   closeDialog() {
     this.dialogRef.close();

@@ -30,6 +30,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { UserReviewsModule } from './user-reviews/user-reviews.module';
 import { ToolDisplayModule } from './tool-display/tool-display.module';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { MyReviewsModule } from './my-reviews/my-reviews.module';
+import { MyFavoritesModule } from './my-favorites/my-favorites.module';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     OverlayModule,
     ToolDisplayModule,
     UserReviewsModule,
+    MyReviewsModule,
+    MyFavoritesModule,
 
     // Material Modules
     MatButtonModule,

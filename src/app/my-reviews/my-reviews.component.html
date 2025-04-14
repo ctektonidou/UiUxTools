@@ -1,0 +1,34 @@
+<div class="my-reviews-container mt-5">
+    <h2>Οι Αξιολογήσεις Μου</h2>
+
+    <!-- Filters -->
+    <div class="filters">
+        <input type="text" [(ngModel)]="searchText" placeholder="Αναζήτηση εργαλείου..." />
+
+        <select [(ngModel)]="sortOption">
+            <option value="name">Αλφαβητικά</option>
+            <option value="rating-high">Υψηλότερη Βαθμολογία</option>
+            <option value="rating-low">Χαμηλότερη Βαθμολογία</option>
+        </select>
+    </div>
+
+    <!-- Reviews Table/List -->
+    <div class="review-card" *ngFor="let review of filteredReviews()">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="tool-name" (click)="goToTool(review.toolId)">
+                {{ review.toolName }}
+            </h3>
+            <div class="stars">
+                <mat-icon *ngFor="let star of getStars(review.totalRating)">
+                    {{ star }}
+                </mat-icon>
+                <span>{{ review.totalRating }}</span>
+            </div>
+        </div>
+
+        <p class="comment-preview">"{{ review.comment | slice:0:100 }}{{ review.comment.length > 100 ? '...' : '' }}"
+        </p>
+
+        <button mat-button class="view-btn d-flex" (click)="goToTool(review.toolId)">Μετάβαση στο Εργαλείο</button>
+    </div>
+</div>

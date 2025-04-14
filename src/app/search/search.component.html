@@ -1,13 +1,12 @@
 <div class="search-container">
   <h2>Αναζήτηση</h2>
 
-  <!-- Search Input -->
-  <div class="search-bar">
-    <input type="text" formControlName="searchQuery" placeholder="Αναζήτηση εργαλείων..." (input)="filterResults()">
-  </div>
-
   <!-- Search Filters -->
   <form [formGroup]="searchForm" (ngSubmit)="search()">
+    <!-- Search Input -->
+    <div class="search-bar">
+      <input type="text" formControlName="searchQuery" placeholder="Αναζήτηση εργαλείων..." (input)="filterResults()">
+    </div>
     <div formGroupName="featureSelections" class="filters">
       <div *ngFor="let group of featureGroups">
         <label>{{ group.name }}</label>
@@ -33,6 +32,8 @@
 
   <!-- Search Results -->
   <div class="results" *ngIf="loadedResults">
-    <app-search-item *ngFor="let item of filteredResults" [item]="item"></app-search-item>
+    <app-search-item *ngFor="let item of filteredResults" [item]="item" [favoriteToolIds]="favoriteToolIds"
+      (hasCompareList)="onCompareListChanged($event)">
+    </app-search-item>
   </div>
 </div>

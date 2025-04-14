@@ -15,5 +15,7 @@
     <p *ngIf="!reviews?.length" class="no-reviews">No reviews available.</p>
 
     <!-- Render Reviews -->
-    <app-user-review-item *ngFor="let review of reviews" [review]="review"></app-user-review-item>
+    <app-user-review-item *ngFor="let review of reviews" [review]="review" [currentUserId]="currentUserId" (edit)="editReview($event)"
+    (delete)="deleteReview($event)">
+    </app-user-review-item>
 </div>

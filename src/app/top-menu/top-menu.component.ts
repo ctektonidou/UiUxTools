@@ -67,8 +67,15 @@ export class TopMenuComponent{
 
   goToToolManagement() {
     this.router.navigate(['/admin/tools']);
-    
   }
+
+  goToMyReviwews() {
+    this.router.navigate(['/my-reviews']);
+  }
+
+  goToFavorites() {
+    this.router.navigate(['/my-favorites']);
+  }  
 
   logout() {
     localStorage.clear();

@@ -1,11 +1,17 @@
 <div class="search-item">
-  <img [src]="item.logo ? 'http://localhost:8081' + item.logo : 'assets/default-logo.png'" alt="{{ item.name }} Logo" class="item-logo">
+  <img [src]="item.logo ? 'http://localhost:8081' + item.logo : 'assets/default-logo.png'" alt="{{ item.name }} Logo"
+    class="item-logo">
   <div class="item-details">
     <h3>{{ item.name }}</h3>
     <p class="rating">⭐ {{ item.rating.toFixed(1) }} ({{item.reviews}})</p>
   </div>
   <div class="button-container">
+    <mat-icon (click)="toggleFavorite(item)" class="favorite-icon"
+      [ngClass]="{ 'favorited': favoriteToolIds.includes(item.id) }">
+      {{ favoriteToolIds.includes(item.id) ? 'favorite' : 'favorite_border' }}
+    </mat-icon>
     <mat-icon class="swap-icon" (click)="addItemToCompareList(item)">compare_arrows</mat-icon>
-    <button class="view-btn d-flex" (click)="goToTool(item)">Προβολή Εργαλείου <mat-icon>arrow_forward</mat-icon></button>
+    <button class="view-btn d-flex" (click)="goToTool(item)">Προβολή Εργαλείου
+      <mat-icon>arrow_forward</mat-icon></button>
   </div>
 </div>

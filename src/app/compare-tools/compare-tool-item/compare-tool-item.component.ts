@@ -24,8 +24,8 @@ export class CompareToolItemComponent {
       width: '600px',
       data: {
         type: DecisionPopupType.DELETE,
-        title: 'Επιβεβαίωση  Διαγραφής Εργαλείου',
-        message: 'Είστε σίγουροι ότι θέλετε να διαγράψετε το ' + tool.name + ' από την σύγκριση;'
+        title: 'Επιβεβαίωση  Αφαίρεσης Εργαλείου',
+        message: 'Είστε σίγουροι ότι θέλετε να αφαιρέσετε το ' + tool.name + ' από την σύγκριση;'
       },
       panelClass: 'custom-dialog-container',
       backdropClass: 'custom-dialog-backdrop',

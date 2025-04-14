@@ -1,10 +1,40 @@
 .review-card {
-    background: #f9f9f9;
-    padding: 15px;
+    position: relative;
+    padding: 1rem;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    margin-bottom: 15px;
-    border-left: 5px solid #3e721d;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    background-color: #fff;
+
+    .review-actions {
+        position: relative;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 0.3rem;
+        margin-bottom: 10px;
+        justify-content: flex-end;
+
+        .edit-icon {
+            color: orange;
+            cursor: pointer;
+
+            &:hover {
+                color: darkorange;
+            }
+        }
+
+        .delete-icon {
+            color: red;
+            cursor: pointer;
+
+            &:hover {
+                color: darkred;
+            }
+        }
+    }
 }
 
 .review-header {

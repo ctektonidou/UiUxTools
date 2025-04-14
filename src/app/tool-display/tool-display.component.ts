@@ -8,6 +8,8 @@ import { DecisionPopupComponent } from '../decision-popup/decision-popup.compone
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
 import { EvaluationsService } from '../shared/services/evaluations.service';
+import { AuthService } from '../shared/services/auth.service';
+import { FavoriteToolsService } from '../shared/services/favorite-tools.service';
 
 @Component({
   selector: 'app-tool-display',
@@ -21,6 +23,8 @@ export class ToolDisplayComponent implements OnInit {
   featureMap: { [key: string]: string } = {}; // group -> comma-separated features
   reviews: any[] = [];
   toolLoaded: boolean = false;
+  currentUserId: number = 0;
+  isFavorite = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,12 +32,16 @@ export class ToolDisplayComponent implements OnInit {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private passCompareListService: PassCompareListService,
-    private evaluationsService: EvaluationsService
+    private evaluationsService: EvaluationsService,
+    public authService: AuthService,
+    private favoriteService: FavoriteToolsService
   ) { }
 
   ngOnInit(): void {
+    this.currentUserId = this.authService.getUserId() || 0;
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
+      this.favoriteService.isFavorite(this.currentUserId, this.tool.toolId).subscribe(res => this.isFavorite = res);
       this.loadTool(id);
       this.loadReviews(id);
     }
@@ -141,5 +149,13 @@ export class ToolDisplayComponent implements OnInit {
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     });
+  }
+
+  toggleFavorite() {
+    if (this.isFavorite) {
+      this.favoriteService.removeFavorite(this.currentUserId, this.tool.toolId).subscribe(() => this.isFavorite = false);
+    } else {
+      this.favoriteService.addFavorite(this.currentUserId, this.tool.toolId).subscribe(() => this.isFavorite = true);
+    }
   }
 }

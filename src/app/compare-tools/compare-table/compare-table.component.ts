@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { SearchItem } from '../../shared/models/search-item.model';
 
 @Component({
@@ -11,14 +11,19 @@ export class CompareTableComponent {
   formattedCompareList: any[] = [];
   featureGroups: string[] = [];
 
-  ngOnInit() {
-    this.prepareComparisonData();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['compareList']) {
+      this.prepareComparisonData();
+    }
   }
 
   prepareComparisonData() {
-    if (!this.compareList || this.compareList.length === 0) return;
+    if (!this.compareList || this.compareList.length === 0) {
+      this.formattedCompareList = [];
+      this.featureGroups = [];
+      return;
+    }
 
-    // Extract all unique feature groups
     const allGroups = new Set<string>();
     this.compareList.forEach(tool => {
       tool.formattedFeatures.forEach((feature: any) => allGroups.add(feature.group));
@@ -26,7 +31,6 @@ export class CompareTableComponent {
 
     this.featureGroups = Array.from(allGroups);
 
-    // Create a lookup table
     this.formattedCompareList = this.compareList.map(tool => {
       const featureMap: { [key: string]: string } = {};
       tool.formattedFeatures.forEach((feature: any) => {

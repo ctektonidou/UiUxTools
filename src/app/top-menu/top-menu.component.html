@@ -6,6 +6,8 @@
   <ng-container *ngIf="tokenInLocalStorage(); else guestTemplate">
     <button mat-button class="menu-item" (click)="logout()">Αποσύνδεση</button>
     <button mat-button class="menu-item" *ngIf="isAdmin()" (click)="goToToolManagement()">Διαχείριση Εργαλείων</button>
+    <button mat-button class="menu-item" (click)="goToMyReviwews()">Οι Αξιολογήσεις μου</button>
+    <button mat-button class="menu-item" (click)="goToFavorites()">Αγαπημένα</button>
     <button mat-button class="menu-item" (click)="goToSearch()">Αναζήτηση</button>
     <button mat-button class="menu-item" (click)="goToUserProfile()">Το προφίλ μου</button>
   </ng-container>

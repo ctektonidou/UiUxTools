@@ -5,6 +5,7 @@ import { ToolService } from '../shared/services/tool.service';
 import { SearchItem } from '../shared/models/search-item.model';
 import { PassCompareListService } from '../shared/services/pass-compare-list.service';
 import { Router } from '@angular/router';
+import { FavoriteToolsService } from '../shared/services/favorite-tools.service';
 
 @Component({
   selector: 'app-search',
@@ -22,20 +23,27 @@ export class SearchComponent implements OnInit {
 
   showCompare: boolean = false;
   loadedResults: boolean = false;
+  favoriteToolIds: number[] = [];
 
   constructor(
     private fb: FormBuilder,
     private featureService: FeatureService,
     private toolService: ToolService,
     private passCompareListService: PassCompareListService,
-    private router: Router
+    private router: Router,
+    private favoriteService: FavoriteToolsService
   ) { }
 
   ngOnInit() {
     this.initForm();
     this.loadFeatureGroups();
     this.search(); // Fetch all tools when the page loads
-
+    const userId = Number(localStorage.getItem('userId'));
+    if (userId) {
+      this.favoriteService.getFavoritesByUser(userId).subscribe(favorites => {
+        this.favoriteToolIds = favorites.map(fav => fav.toolId);
+      });
+    }
     this.passCompareListService.selectedCompareList$.subscribe(list => {
       this.showCompare = list.length > 0;
     });
@@ -113,4 +121,9 @@ export class SearchComponent implements OnInit {
   goToCompare() {
     this.router.navigate(['/compare']);
   }
+
+  onCompareListChanged(updatedList: SearchItem[]) {
+    this.showCompare = updatedList.length > 0;
+  } 
+  
 }

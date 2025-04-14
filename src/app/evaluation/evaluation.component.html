@@ -48,6 +48,7 @@
 
     <!-- Submit Button -->
     <div class="submit-section">
-        <button mat-raised-button class="submit-btn" (click)="submitReview()" [disabled]="!isFormValid">Δημοσίευση</button>
+        <button mat-raised-button class="submit-btn" (click)="submitReview()" [disabled]="!isFormValid" *ngIf="!isEditMode">Δημοσίευση</button>
+        <button mat-raised-button class="submit-btn" (click)="submitReview()" [disabled]="!isFormValid" *ngIf="isEditMode">Ενημέρωση</button>
     </div>
 </mat-dialog-content>
