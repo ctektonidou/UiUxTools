@@ -41,7 +41,6 @@ export class ToolDisplayComponent implements OnInit {
     this.currentUserId = this.authService.getUserId() || 0;
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.favoriteService.isFavorite(this.currentUserId, this.tool.toolId).subscribe(res => this.isFavorite = res);
       this.loadTool(id);
       this.loadReviews(id);
     }
@@ -79,6 +78,7 @@ export class ToolDisplayComponent implements OnInit {
         this.featureMap[group] = groupedFeatures[group].join(', ');
       }
       this.toolLoaded = true;
+      this.favoriteService.isFavorite(this.currentUserId, this.tool.toolId).subscribe(res => this.isFavorite = res);
     });
   }
 

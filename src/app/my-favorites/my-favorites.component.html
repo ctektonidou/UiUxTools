@@ -1,17 +1,19 @@
 <div class="favorites-container mt-5">
-    <h2>Τα Αγαπημένα Μου Εργαλεία</h2>
+    <h2 class="favorites-title">Τα Αγαπημένα Μου Εργαλεία</h2>
 
     <div *ngIf="favorites.length === 0" class="empty-message">Δεν έχετε προσθέσει αγαπημένα εργαλεία.</div>
 
-    <div *ngFor="let tool of favorites" class="search-item">
-        <img [src]="'http://localhost:8081' + tool.logo" alt="{{ tool.name }} Logo" class="item-logo" />
-        <div class="item-details">
-            <h3>{{ tool.name }}</h3>
-            <p class="rating">⭐ {{ tool.rating.toFixed(1) }} ({{ tool.reviews }})</p>
-        </div>
-        <div class="button-container">
-            <button class="view-btn d-flex" (click)="goToTool(tool)">Προβολή Εργαλείου
-                <mat-icon>arrow_forward</mat-icon></button>
+    <div class="favorites-grid">
+        <div *ngFor="let tool of favorites" class="search-item mt-3">
+            <img [src]="'http://localhost:8081' + tool.image" alt="{{ tool.toolName }} Logo" class="item-logo" />
+            <div class="item-details">
+                <h3>{{ tool.toolName }}</h3>
+                <p class="rating">⭐ {{ tool.finalRating.toFixed(1) }} ({{ tool.reviewCount }})</p>
+            </div>
+            <div class="button-container">
+                <button class="view-btn d-flex" (click)="goToTool(tool)">Προβολή Εργαλείου
+                    <mat-icon>arrow_forward</mat-icon></button>
+            </div>
         </div>
     </div>
 </div>

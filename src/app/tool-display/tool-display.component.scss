@@ -138,3 +138,15 @@
         color: #333;
     }
 }
+
+.favorite-icon {
+    color: gray;
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+
+    &.favorited {
+        color: red;
+    }
+}

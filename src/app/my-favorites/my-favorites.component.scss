@@ -1,13 +1,68 @@
 .favorites-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
-    /* Centers horizontally */
     padding: 0 20px;
-    /* Adds padding on left/right */
+}
+
+.favorites-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 tools per row */
+    gap: 20px;
+}
+
+.search-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.item-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.item-details {
+    margin-bottom: 10px;
+}
+
+.rating {
+    font-size: 14px;
+    color: #777;
+}
+
+.button-container {
+    margin-top: auto;
 }
 
 .empty-message {
     padding: 40px 0;
     text-align: center;
     color: #555;
+}
+
+.view-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 180px;
 }
