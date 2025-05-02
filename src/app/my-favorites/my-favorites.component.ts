@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavoriteToolsService } from '../shared/services/favorite-tools.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-my-favorites',
@@ -9,6 +10,7 @@ import { FavoriteToolsService } from '../shared/services/favorite-tools.service'
 })
 export class MyFavoritesComponent implements OnInit {
   favorites: any[] = [];
+  environment = environment;
 
   constructor(private favoriteService: FavoriteToolsService, private router: Router) {}
 

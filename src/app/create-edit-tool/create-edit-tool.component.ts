@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-create-edit-tool',
@@ -25,6 +26,8 @@ export class CreateEditToolComponent implements OnInit {
   dropdownStates: { [key: number]: boolean } = {}; // Store dropdown open/close state
   imageBase64: string | null = null; // Store Base64 image
   singleSelectionGroupIds: number[] = []; //Store One Value Filters
+  featuresLoaded: boolean = false;
+  environment = environment;
 
   toggleDropdown(groupId: number): void {
     this.dropdownStates[groupId] = !this.dropdownStates[groupId]; // Toggle state
@@ -99,6 +102,7 @@ export class CreateEditToolComponent implements OnInit {
         this.singleSelectionGroupIds.push(featureGroupId);
       }
       if (callback) callback();
+      this.featuresLoaded = true;
     });
   }
 
@@ -113,7 +117,7 @@ export class CreateEditToolComponent implements OnInit {
         name: tool.name,
         description: tool.description,
         productLink: tool.productLink,
-        imageUrl: 'http://localhost:8081' + tool.image
+        imageUrl: this.environment.apiBaseUrl + tool.image
       });
 
       // Set the selected features

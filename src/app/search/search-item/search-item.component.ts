@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Tool } from '../../shared/interfaces/get-all-tools';
 import { SearchItem } from '../../shared/models/search-item.model';
 import { FavoriteToolsService } from '../../shared/services/favorite-tools.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-search-item',
@@ -19,6 +20,7 @@ export class SearchItemComponent {
   @Input() favoriteToolIds: number[] = [];
   @Output() hasCompareList = new EventEmitter<SearchItem[]>();
   compareList: SearchItem[] = [];
+    environment = environment;
 
   constructor(
     public dialog: MatDialog,

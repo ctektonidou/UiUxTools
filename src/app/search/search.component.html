@@ -2,22 +2,23 @@
   <h2>Αναζήτηση</h2>
 
   <!-- Search Filters -->
-  <form [formGroup]="searchForm" (ngSubmit)="search()">
+  <form [formGroup]="searchForm" (ngSubmit)="search()" *ngIf="featuresLoaded">
     <!-- Search Input -->
     <div class="search-bar">
       <input type="text" formControlName="searchQuery" placeholder="Αναζήτηση εργαλείων..." (input)="filterResults()">
     </div>
-    <div formGroupName="featureSelections" class="filters">
-      <div *ngFor="let group of featureGroups">
-        <label>{{ group.name }}</label>
-        <select [formControlName]="group.id.toString()" (change)="onFeatureSelect()" class="custom-select">
-          <!-- <option value="">All</option> -->
-          <option *ngFor="let item of featureItems[group.id]" [value]="item.featureItemId">
-            {{ item.name }}
-          </option>
-        </select>
+    <div class="filter-container">
+      <div formGroupName="featureSelections" class="filters">
+        <div *ngFor="let group of featureGroups" class="filter-group">
+          <label>{{ group.name }}</label>
+          <select [formControlName]="group.id.toString()" (change)="onFeatureSelect()" class="custom-select">
+            <!-- <option value="">All</option> -->
+            <option *ngFor="let item of featureItems[group.id]" [value]="item.featureItemId">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
       </div>
-
       <div class="button-group">
         <button type="submit" class="search-btn">Αναζήτηση</button>
         <button type="button" class="clear-btn" (click)="resetFilters()">Καθαρισμός Κριτηρίων</button>

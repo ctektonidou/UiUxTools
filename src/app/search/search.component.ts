@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
   showCompare: boolean = false;
   loadedResults: boolean = false;
   favoriteToolIds: number[] = [];
+  featuresLoaded: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -74,6 +75,7 @@ export class SearchComponent implements OnInit {
   loadFeatureItems(featureGroupId: number): void {
     this.featureService.getFeatureItemsByGroup(featureGroupId).subscribe(items => {
       this.featureItems[featureGroupId] = items;
+      this.featuresLoaded = true;
     });
   }
 

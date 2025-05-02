@@ -41,7 +41,6 @@ export class ToolManagementComponent {
       panelClass: 'custom-dialog-container',
       backdropClass: 'custom-dialog-backdrop',
     });
-    //na dw pws 8a pairnw to emit gia to ti ekane
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -52,9 +51,7 @@ export class ToolManagementComponent {
 
   deleteTool(tool: Tool) {
     this.toolService.deleteTool(tool.toolId).subscribe(response => {
-      if (response) {
-        window.location.reload();
-      }
+      window.location.reload();
     });
   }
 

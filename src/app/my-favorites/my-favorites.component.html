@@ -5,7 +5,7 @@
 
     <div class="favorites-grid">
         <div *ngFor="let tool of favorites" class="search-item mt-3">
-            <img [src]="'http://localhost:8081' + tool.image" alt="{{ tool.toolName }} Logo" class="item-logo" />
+            <img [src]="environment.apiBaseUrl + tool.image" alt="{{ tool.toolName }} Logo" class="item-logo" />
             <div class="item-details">
                 <h3>{{ tool.toolName }}</h3>
                 <p class="rating">⭐ {{ tool.finalRating.toFixed(1) }} ({{ tool.reviewCount }})</p>

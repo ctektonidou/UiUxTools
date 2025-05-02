@@ -10,6 +10,7 @@ import { EvaluationComponent } from '../evaluation/evaluation.component';
 import { EvaluationsService } from '../shared/services/evaluations.service';
 import { AuthService } from '../shared/services/auth.service';
 import { FavoriteToolsService } from '../shared/services/favorite-tools.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-tool-display',
@@ -25,6 +26,7 @@ export class ToolDisplayComponent implements OnInit {
   toolLoaded: boolean = false;
   currentUserId: number = 0;
   isFavorite = false;
+  environment = environment;
 
   constructor(
     private route: ActivatedRoute,

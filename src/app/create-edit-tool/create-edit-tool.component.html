@@ -43,7 +43,7 @@
             </div>
 
             <!-- Right Section: Dynamic Feature Selection -->
-            <div class="right-section">
+            <div class="right-section" *ngIf="featuresLoaded">
                 <h3>Κριτήρια Αναζήτησης</h3>
 
                 <div *ngFor="let group of featureGroups" class="feature-group">

@@ -1,7 +1,7 @@
 <div class="tool-container" *ngIf="toolLoaded">
   <!-- Tool Header -->
   <div class="tool-header">
-    <img class="tool-image" [src]="'http://localhost:8081' + tool.imageUrl" alt="{{ tool.name }}">
+    <img class="tool-image" [src]="environment.apiBaseUrl + tool.imageUrl" alt="{{ tool.name }}">
     <div class="tool-info">
       <div class="tool-title">
         <h1>

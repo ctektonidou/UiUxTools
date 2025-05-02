@@ -1,5 +1,5 @@
 <div class="search-item">
-  <img [src]="item.logo ? 'http://localhost:8081' + item.logo : 'assets/default-logo.png'" alt="{{ item.name }} Logo"
+  <img [src]="item.logo ? environment.apiBaseUrl + item.logo : 'assets/default-logo.png'" alt="{{ item.name }} Logo"
     class="item-logo">
   <div class="item-details">
     <h3>{{ item.name }}</h3>

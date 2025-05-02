@@ -4,6 +4,7 @@ import { DecisionPopupComponent } from '../../decision-popup/decision-popup.comp
 import { DecisionPopupType } from '../../shared/enums/desicion-popup-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-compare-tool-item',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class CompareToolItemComponent {
   @Input() tool!: SearchItem;
   @Output() remove = new EventEmitter<SearchItem>();
+  environment = environment;
 
   constructor(
     public dialog: MatDialog,
