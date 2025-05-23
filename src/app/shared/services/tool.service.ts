@@ -3,12 +3,14 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetAllToolsResponse, Tool } from "../interfaces/get-all-tools";
 import { User } from "../interfaces/user";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ToolService {
-    private apiUrl = 'http://localhost:8081/api';
+    // private apiUrl = 'http://localhost:8081/api';
+    private apiUrl = environment.apiBaseUrl;
 
     constructor(private http: HttpClient) { }
 

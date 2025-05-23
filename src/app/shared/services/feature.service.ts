@@ -3,13 +3,17 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetAllToolsResponse, Tool } from "../interfaces/get-all-tools";
 import { User } from "../interfaces/user";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FeatureService {
-    private featureGroupUrl = 'http://localhost:8081/api/feature/group';
-    private featureItemUrl = 'http://localhost:8081/api/feature/item';
+    // private featureGroupUrl = 'http://localhost:8081/api/feature/group';
+    // private featureItemUrl = 'http://localhost:8081/api/feature/item';
+    
+    private featureGroupUrl = environment.apiBaseUrl + '/feature/group';
+    private featureItemUrl = environment.apiBaseUrl + '/feature/item';
 
     constructor(private http: HttpClient) { }
 

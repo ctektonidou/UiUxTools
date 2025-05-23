@@ -20,7 +20,7 @@ export class SearchItemComponent {
   @Input() favoriteToolIds: number[] = [];
   @Output() hasCompareList = new EventEmitter<SearchItem[]>();
   compareList: SearchItem[] = [];
-    environment = environment;
+  environment = environment;
 
   constructor(
     public dialog: MatDialog,

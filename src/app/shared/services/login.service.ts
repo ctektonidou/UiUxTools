@@ -7,8 +7,9 @@ import { LoginRequest } from '../interfaces/login';
   providedIn: 'root'
 })
 export class LoginService {
-  private authUrl = 'http://localhost:8081/auth/login';
-  private apiUrl = 'http://localhost:8081/api';
+  // private authUrl = 'http://localhost:8081/auth/login';
+  // private authUrl = 'http://192.168.196.128:8080/thesis-1.0-SNAPSHOT/auth/login';
+  private authUrl = 'http://38.242.217.176:8080/auth/login';
 
   constructor(private http: HttpClient) { }
 
