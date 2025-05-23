@@ -12,7 +12,7 @@
     </div>
 
     <!-- Show Message If No Reviews -->
-    <p *ngIf="!reviews?.length" class="no-reviews">No reviews available.</p>
+    <p *ngIf="!reviews?.length" class="no-reviews">Δεν υπάρχουν αξιολογήσεις</p>
 
     <!-- Render Reviews -->
     <app-user-review-item *ngFor="let review of reviews" [review]="review" [currentUserId]="currentUserId" (edit)="editReview($event)"
