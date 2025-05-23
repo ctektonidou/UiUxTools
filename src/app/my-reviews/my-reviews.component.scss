@@ -30,6 +30,7 @@
         .stars {
             display: flex;
             flex-direction: row;
+
             mat-icon {
                 color: #ffa000;
                 font-size: 20px;
@@ -56,5 +57,9 @@
     justify-content: center;
     white-space: nowrap;
     min-width: 180px;
-  }
-  
+}
+
+.noResults {
+    display: flex;
+    justify-content: center;
+}

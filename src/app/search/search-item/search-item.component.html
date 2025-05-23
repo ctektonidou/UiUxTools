@@ -6,7 +6,7 @@
     <p class="rating">⭐ {{ item.rating.toFixed(1) }} ({{item.reviews}})</p>
   </div>
   <div class="button-container">
-    <mat-icon (click)="toggleFavorite(item)" class="favorite-icon"
+    <mat-icon *ngIf="tokenInLocalStorage()" (click)="toggleFavorite(item)" class="favorite-icon"
       [ngClass]="{ 'favorited': favoriteToolIds.includes(item.id) }">
       {{ favoriteToolIds.includes(item.id) ? 'favorite' : 'favorite_border' }}
     </mat-icon>

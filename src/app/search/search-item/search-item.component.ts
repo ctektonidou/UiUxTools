@@ -91,7 +91,7 @@ export class SearchItemComponent {
   toggleFavorite(item: SearchItem) {
     const userId = Number(localStorage.getItem('userId'));
     const isFav = this.favoriteToolIds.includes(item.id);
-  
+
     if (isFav) {
       this.favoriteService.removeFavorite(userId, item.id).subscribe(() => {
         this.favoriteToolIds = this.favoriteToolIds.filter(id => id !== item.id);
@@ -101,6 +101,13 @@ export class SearchItemComponent {
         this.favoriteToolIds.push(item.id);
       });
     }
+  }
+
+  tokenInLocalStorage(): boolean {
+    const isToken = localStorage.getItem('token');
+    if (isToken) {
+      return true;
+    } return false;
   }
 
 }

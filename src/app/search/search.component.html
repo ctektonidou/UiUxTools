@@ -32,9 +32,15 @@
   </div>
 
   <!-- Search Results -->
-  <div class="results" *ngIf="loadedResults">
+  <div class="results" *ngIf="loadedResults && filteredResults.length > 0; else noResultsTemplate">
     <app-search-item *ngFor="let item of filteredResults" [item]="item" [favoriteToolIds]="favoriteToolIds"
       (hasCompareList)="onCompareListChanged($event)">
     </app-search-item>
   </div>
+
+   <ng-template #noResultsTemplate>
+    <div class="noResults">
+      <span>Δεν βρέθηκαν εργαλεία</span>
+    </div>
+  </ng-template>
 </div>

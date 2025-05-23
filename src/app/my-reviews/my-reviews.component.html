@@ -12,23 +12,33 @@
         </select>
     </div>
 
-    <!-- Reviews Table/List -->
-    <div class="review-card" *ngFor="let review of filteredReviews()">
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="tool-name" (click)="goToTool(review.toolId)">
-                {{ review.toolName }}
-            </h3>
-            <div class="stars">
-                <mat-icon *ngFor="let star of getStars(review.totalRating)">
-                    {{ star }}
-                </mat-icon>
-                <span>{{ review.totalRating }}</span>
+    <!-- Reviews List -->
+    <div *ngIf="filteredReviews() && filteredReviews().length > 0; else noReviewsTemplate">
+        <div class="review-card" *ngFor="let review of filteredReviews()">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="tool-name" (click)="goToTool(review.toolId)">
+                    {{ review.toolName }}
+                </h3>
+                <div class="stars">
+                    <mat-icon *ngFor="let star of getStars(review.totalRating)">
+                        {{ star }}
+                    </mat-icon>
+                    <span>{{ review.totalRating }}</span>
+                </div>
             </div>
+
+            <p class="comment-preview">"{{ review.comment | slice:0:100 }}{{ review.comment.length > 100 ? '...' : ''
+                }}"
+            </p>
+
+            <button mat-button class="view-btn d-flex" (click)="goToTool(review.toolId)">Μετάβαση στο Εργαλείο</button>
         </div>
-
-        <p class="comment-preview">"{{ review.comment | slice:0:100 }}{{ review.comment.length > 100 ? '...' : '' }}"
-        </p>
-
-        <button mat-button class="view-btn d-flex" (click)="goToTool(review.toolId)">Μετάβαση στο Εργαλείο</button>
     </div>
+
+    <ng-template #noReviewsTemplate>
+        <div class="noResults">
+            <span>Δεν βρέθηκαν αξιολογήσεις</span>
+        </div>
+    </ng-template>
+
 </div>

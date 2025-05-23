@@ -160,4 +160,11 @@ export class ToolDisplayComponent implements OnInit {
       this.favoriteService.addFavorite(this.currentUserId, this.tool.toolId).subscribe(() => this.isFavorite = true);
     }
   }
+
+  tokenInLocalStorage(): boolean {
+    const isToken = localStorage.getItem('token');
+    if (isToken) {
+      return true;
+    } return false;
+  }
 }

@@ -20,11 +20,11 @@
 
     <!-- Action Buttons -->
     <div class="tool-actions">
-      <mat-icon (click)="toggleFavorite()" class="favorite-icon" [ngClass]="{ 'favorited': isFavorite }">
+      <mat-icon *ngIf="tokenInLocalStorage()" (click)="toggleFavorite()" class="favorite-icon" [ngClass]="{ 'favorited': isFavorite }">
         {{ isFavorite ? 'favorite' : 'favorite_border' }}
       </mat-icon>
       <mat-icon class="swap-icon" (click)="addItemToCompareList(tool)">compare_arrows</mat-icon>
-      <button mat-button class="save-btn" (click)="openEvaluationDialog(tool)">
+      <button mat-button *ngIf="tokenInLocalStorage()" class="save-btn" (click)="openEvaluationDialog(tool)">
         Αξιολόγηση Εργαλείου
       </button>
     </div>
