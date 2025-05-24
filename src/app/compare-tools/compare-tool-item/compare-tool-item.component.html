@@ -3,7 +3,7 @@
   <h3 (click)="goToTool(tool)">{{ tool.name }}</h3>
 
   <p class="rating" (click)="goToTool(tool)">
-    <mat-icon>star</mat-icon> {{ tool.rating }} ({{ tool.reviews }})
+    <mat-icon>star</mat-icon> {{ tool.rating | number:'1.1-1' }} ({{ tool.reviews }})
   </p>
 
   <button class="delete-btn d-flex" (click)="confirmDeleteTool(tool); $event.stopPropagation()">

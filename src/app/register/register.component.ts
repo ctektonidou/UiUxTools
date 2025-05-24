@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { ToolService } from '../shared/services/tool.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DecisionPopupType } from '../shared/enums/desicion-popup-type.enum';
+import { DecisionPopupComponent } from '../decision-popup/decision-popup.component';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +20,8 @@ export class RegisterComponent {
     public dialogRef: MatDialogRef<RegisterComponent>,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private toolService: ToolService
+    private toolService: ToolService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -51,7 +55,21 @@ export class RegisterComponent {
     this.toolService.createUser(payload).subscribe(response => {
       if (response) {
         this.closeDialog();
+        this.showSuccessPopup();
       }
+    });
+  }
+
+  showSuccessPopup() {
+    const dialogRef = this.dialog.open(DecisionPopupComponent, {
+      width: '600px',
+      data: {
+        type: DecisionPopupType.SUCCESS,
+        title: 'Επιτυχής δημιουργία λογαριασμού',
+        message: 'Η δημιουργία λογαριασμού ολοκληρώθηκε με επιτυχία. Μπορείτε να συνδεθείτε με τα στοιχεία που δηλώσατε.'
+      },
+      panelClass: 'custom-dialog-container',
+      backdropClass: 'custom-dialog-backdrop',
     });
   }
 
