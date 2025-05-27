@@ -7,10 +7,11 @@
   </div>
   <div class="button-container">
     <mat-icon *ngIf="tokenInLocalStorage()" (click)="toggleFavorite(item)" class="favorite-icon"
-      [ngClass]="{ 'favorited': favoriteToolIds.includes(item.id) }">
+      [ngClass]="{ 'favorited': favoriteToolIds.includes(item.id) }"
+      [matTooltip]="favoriteToolIds.includes(item.id) ? 'Αφαίρεση από αγαπημένα' : 'Προσθήκη στα αγαπημένα'">
       {{ favoriteToolIds.includes(item.id) ? 'favorite' : 'favorite_border' }}
     </mat-icon>
-    <mat-icon class="swap-icon" (click)="addItemToCompareList(item)">compare_arrows</mat-icon>
+    <mat-icon class="swap-icon" (click)="addItemToCompareList(item)" matTooltip="Προσθήκη για σύγκριση">compare_arrows</mat-icon>
     <button class="view-btn d-flex" (click)="goToTool(item)">Προβολή Εργαλείου
       <mat-icon>arrow_forward</mat-icon></button>
   </div>

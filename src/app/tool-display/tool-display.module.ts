@@ -8,6 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { ToolDisplayComponent } from "./tool-display.component";
 import { UserReviewsModule } from "../user-reviews/user-reviews.module";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const routes: Routes = [
     { path: '', component: ToolDisplayComponent }
@@ -23,7 +24,8 @@ const routes: Routes = [
         FormsModule,
         MatButtonModule,
         MatIconModule,
-        UserReviewsModule
+        UserReviewsModule,
+        MatTooltipModule
     ],
     exports: [ToolDisplayComponent]
 })

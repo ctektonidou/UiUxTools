@@ -8,11 +8,10 @@ body {
   overflow-x: hidden;
 }
 
-
 .main-content {
   display: flex;
   flex-direction: column;
-  min-height: 600px;
+  min-height: 1000px;
 }
 
 /* Ensure MatDialog appears above everything */

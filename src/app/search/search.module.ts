@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const routes: Routes = [
     { path: '', component: SearchComponent }
@@ -27,7 +28,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         MatCheckboxModule,
         MatIconModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTooltipModule
     ],
     exports: [SearchComponent]
 })
